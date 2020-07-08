@@ -1,5 +1,7 @@
 package react4j.webspeechdemo;
 
+import arez.annotations.CascadeDispose;
+import elemental2.dom.HTMLInputElement;
 import javax.annotation.Nonnull;
 import jsinterop.base.Js;
 import react4j.ReactNode;
@@ -14,9 +16,15 @@ import react4j.dom.proptypes.html.attributeTypes.ButtonType;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import static react4j.dom.DOM.*;
 
-@View
+@View( type = View.Type.TRACKING )
 abstract class Application
 {
+  private static final double DEFAULT_PITCH = 0.5;
+  private static final double DEFAULT_RATE = 0.0;
+  private static final double DEFAULT_VOLUME = 1.0;
+  @CascadeDispose
+  final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME );
+
   @Nonnull
   @Render
   ReactNode render()
@@ -34,45 +42,49 @@ abstract class Application
                label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
                input( new InputProps().id( "pitch" )
                         .type( InputType.range )
-                        .value( "0.5" )
+                        .value( String.valueOf( _speechData.getPitch() ) )
                         .min( "0" )
                         .max( "1" )
-                        .step( "0.05" ) ),
+                        .step( "0.05" )
+                        .onChange( e -> _speechData.setPitch( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset pitch" ) )
                          .title( "Reset pitch" )
-                         .onClick( e -> onResetPitchClick() ),
+                         .onClick( e -> _speechData.setPitch( DEFAULT_PITCH ) ),
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "rate" ), "Rate" ),
                input( new InputProps().id( "rate" )
                         .type( InputType.range )
-                        .value( "0" )
+                        .value( String.valueOf( _speechData.getRate() ) )
                         .min( "-3" )
                         .max( "3" )
-                        .step( "0.25" ) ),
+                        .step( "0.25" )
+                        .onChange( e -> _speechData.setRate( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset rate" ) )
                          .title( "Reset rate" )
-                         .onClick( e -> onResetRateClick() ),
+                         .onClick( e -> _speechData.setRate( DEFAULT_RATE ) ),
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "volume" ), "Volume" ),
                input( new InputProps().id( "volume" )
                         .type( InputType.range )
-                        .value( "1" )
+                        .value( String.valueOf( _speechData.getVolume() ) )
                         .min( "0" )
                         .max( "1" )
-                        .step( "0.05" ) ),
+                        .step( "0.05" )
+                        .onChange( e -> _speechData.setVolume( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) )
+               ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset volume" ) )
                          .title( "Reset volume" )
-                         .onClick( e -> onResetVolumeClick() ),
+                         .onClick( e -> _speechData.setVolume( DEFAULT_VOLUME ) ),
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "speecharg" ),
@@ -137,18 +149,6 @@ abstract class Application
   }
 
   private void onResetVoiceClick()
-  {
-  }
-
-  private void onResetVolumeClick()
-  {
-  }
-
-  private void onResetRateClick()
-  {
-  }
-
-  private void onResetPitchClick()
   {
   }
 }
