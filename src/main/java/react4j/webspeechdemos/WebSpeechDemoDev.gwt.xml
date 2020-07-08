@@ -1,0 +1,8 @@
+<module rename-to='todomvc_dev'>
+  <inherits name='react4j.webspeechdemos.WebSpeechDemo'/>
+  <inherits name='react4j.dom.DomDev'/>
+  <inherits name='arez.ArezDebug'/>
+
+  <source path='ignore'/>
+  <public path='public/dev'/>
+</module>
