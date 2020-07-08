@@ -1,4 +1,4 @@
-<module rename-to='todomvc'>
+<module rename-to='webspeechdemo'>
   <inherits name='react4j.webspeechdemos.WebSpeechDemo'/>
   <inherits name='com.google.gwt.precompress.Precompress'/>
 
