@@ -1,5 +1,5 @@
 <module rename-to='webspeechdemo_dev'>
-  <inherits name='react4j.webspeechdemos.WebSpeechDemo'/>
+  <inherits name='react4j.webspeechdemo.WebSpeechDemo'/>
   <inherits name='react4j.dom.DomDev'/>
   <inherits name='arez.ArezDebug'/>
 

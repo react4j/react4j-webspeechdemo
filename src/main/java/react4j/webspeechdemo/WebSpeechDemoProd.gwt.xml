@@ -1,5 +1,5 @@
 <module rename-to='webspeechdemo'>
-  <inherits name='react4j.webspeechdemos.WebSpeechDemo'/>
+  <inherits name='react4j.webspeechdemo.WebSpeechDemo'/>
   <inherits name='com.google.gwt.precompress.Precompress'/>
 
   <set-property name='jre.checks.checkLevel' value='MINIMAL'/>

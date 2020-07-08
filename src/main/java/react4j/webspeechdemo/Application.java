@@ -1,4 +1,4 @@
-package react4j.webspeechdemos;
+package react4j.webspeechdemo;
 
 import javax.annotation.Nonnull;
 import jsinterop.base.Js;

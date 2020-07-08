@@ -1,4 +1,4 @@
-package react4j.webspeechdemos;
+package react4j.webspeechdemo;
 
 import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;

@@ -2,8 +2,8 @@ require 'buildr/git_auto_version'
 require 'buildr/gwt'
 
 desc 'React4j WebSpeech Demos'
-define 'react4j-webspeechdemos' do
-  project.group = 'org.realityforge.react4j.webspeechdemos'
+define 'react4j-webspeechdemo' do
+  project.group = 'org.realityforge.react4j.webspeechdemo'
   compile.options.source = '1.8'
   compile.options.target = '1.8'
   compile.options.lint = 'all,-processing,-serial'
@@ -31,14 +31,14 @@ define 'react4j-webspeechdemos' do
                :gwt_user
 
   # Exclude the Dev module if EXCLUDE_GWT_DEV_MODULE is true
-  GWT_MODULES = %w(react4j.webspeechdemos.WebSpeechDemoProd) + (ENV['EXCLUDE_GWT_DEV_MODULE'] == 'true' ? [] : %w(react4j.webspeechdemos.WebSpeechDemoDev))
+  GWT_MODULES = %w(react4j.webspeechdemo.WebSpeechDemoProd) + (ENV['EXCLUDE_GWT_DEV_MODULE'] == 'true' ? [] : %w(react4j.webspeechdemo.WebSpeechDemoDev))
   gwt_enhance(project,
               :modules_complete => true,
               :package_jars => false,
               :gwt_modules => GWT_MODULES,
               :module_gwtc_args => {
-                'react4j.webspeechdemos.WebSpeechDemoDev' => %w(-optimize 9 -checkAssertions -XmethodNameDisplayMode FULL -noincremental),
-                'react4j.webspeechdemos.WebSpeechDemoProd' => %w(-XdisableClassMetadata -XdisableCastChecking -optimize 9 -nocheckAssertions -XmethodNameDisplayMode NONE -noincremental -compileReport)
+                'react4j.webspeechdemo.WebSpeechDemoDev' => %w(-optimize 9 -checkAssertions -XmethodNameDisplayMode FULL -noincremental),
+                'react4j.webspeechdemo.WebSpeechDemoProd' => %w(-XdisableClassMetadata -XdisableCastChecking -optimize 9 -nocheckAssertions -XmethodNameDisplayMode NONE -noincremental -compileReport)
               })
 
   iml.excluded_directories << project._('tmp')
@@ -46,7 +46,7 @@ define 'react4j-webspeechdemos' do
   ipr.add_component_from_artifact(:idea_codestyle)
 
   ipr.add_gwt_configuration(project,
-                            :gwt_module => 'react4j.webspeechdemos.WebSpeechDemoDev',
+                            :gwt_module => 'react4j.webspeechdemo.WebSpeechDemoDev',
                             :start_javascript_debugger => false,
                             :open_in_browser => false,
                             :vm_parameters => '-Xmx2G',
