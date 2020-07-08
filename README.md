@@ -1,4 +1,4 @@
-# React4j WebSpeech Demos
+# React4j WebSpeech Demo
 
 [![Build Status](https://api.travis-ci.com/react4j/react4j-webspeechdemo.png?branch=master)](http://travis-ci.com/react4j/react4j-webspeechdemo)
 
