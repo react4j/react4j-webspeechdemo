@@ -1,6 +1,5 @@
 package react4j.webspeechdemo;
 
-import arez.spytools.browser.react4j.ReactArezSpyUtil;
 import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
 import react4j.ReactElement;
@@ -12,7 +11,6 @@ public final class Main
   @Override
   public void onModuleLoad()
   {
-    ReactArezSpyUtil.enableSpyEventLogging();
     ReactDOM.render( ReactElement.createStrictMode( ApplicationBuilder.build() ),
                      DomGlobal.document.getElementById( "app" ) );
   }
