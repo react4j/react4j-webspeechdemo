@@ -90,7 +90,7 @@ abstract class Application
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "voice" ), "Voice" ),
                select(
-                 _speechData.getVoices().stream().map( v -> option( v.name() ) )
+                 _speechData.getVoices().stream().map( v -> option( v.name() + " (" + v.lang() + ")" ) )
                ),
                button( new BtnProps()
                          .type( ButtonType.button )
