@@ -18,6 +18,7 @@ import elemental3.SpeechSynthesisVoice;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 @ArezComponent
 abstract class SpeechData
@@ -46,6 +47,12 @@ abstract class SpeechData
   abstract double getVolume();
 
   abstract void setVolume( double volume );
+
+  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
+  @Nullable
+  abstract SpeechSynthesisVoice getVoice();
+
+  abstract void setVoice( @Nullable SpeechSynthesisVoice voice );
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   List<SpeechSynthesisVoice> getVoices()

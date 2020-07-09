@@ -1,17 +1,24 @@
 package react4j.webspeechdemo;
 
+import arez.annotations.Action;
 import arez.annotations.CascadeDispose;
+import elemental2.dom.Element;
 import elemental2.dom.HTMLInputElement;
+import elemental2.dom.HTMLSelectElement;
+import elemental3.SpeechSynthesisVoice;
 import javax.annotation.Nonnull;
 import jsinterop.base.Js;
 import react4j.ReactNode;
 import react4j.annotations.Render;
 import react4j.annotations.View;
+import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.ImgProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.LabelProps;
+import react4j.dom.proptypes.html.OptionProps;
+import react4j.dom.proptypes.html.SelectProps;
 import react4j.dom.proptypes.html.attributeTypes.ButtonType;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import static react4j.dom.DOM.*;
@@ -90,7 +97,8 @@ abstract class Application
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "voice" ), "Voice" ),
                select(
-                 _speechData.getVoices().stream().map( v -> option( v.name() + " (" + v.lang() + ")" ) )
+                 new SelectProps().onChange( this::onVoiceChange ),
+                 _speechData.getVoices().stream().map( this::renderVoiceOption )
                ),
                button( new BtnProps()
                          .type( ButtonType.button )
@@ -132,6 +140,28 @@ abstract class Application
         ),
         div( new HtmlProps().className( "bottom" ) )
       );
+  }
+
+  @Nonnull
+  private ReactNode renderVoiceOption( @Nonnull final SpeechSynthesisVoice voice )
+  {
+    final SpeechSynthesisVoice currentVoice = _speechData.getVoice();
+    return option( new OptionProps()
+                     .value( voice.voiceURI() )
+                     .selected( ( null == currentVoice && voice._default() ) || currentVoice == voice ),
+                   voice.name() + " (" + voice.lang() + ")" );
+  }
+
+  @Action
+  void onVoiceChange( @Nonnull final FormEvent e )
+  {
+    final Element target = e.getTarget();
+    final String value = ( (HTMLSelectElement) target ).value;
+    _speechData.setVoice( _speechData.getVoices()
+                            .stream()
+                            .filter( v -> v.voiceURI().equals( value ) )
+                            .findFirst()
+                            .orElse( null ) );
   }
 
   private void onCancelClick()
