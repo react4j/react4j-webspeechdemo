@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 @ArezComponent
 abstract class SpeechData
 {
+  @SuppressWarnings( "SameParameterValue" )
   @Nonnull
   static SpeechData create( final double pitch, final double rate, final double volume )
   {

@@ -89,7 +89,9 @@ abstract class Application
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "voice" ), "Voice" ),
-               select(),
+               select(
+                 _speechData.getVoices().stream().map( v -> option( v.name() ) )
+               ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset voice" ) )
