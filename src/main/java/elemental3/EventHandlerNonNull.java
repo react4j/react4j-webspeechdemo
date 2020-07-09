@@ -2,6 +2,7 @@ package elemental3;
 
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import jsinterop.annotations.JsFunction;
 import jsinterop.base.Any;
 
@@ -9,6 +10,6 @@ import jsinterop.base.Any;
 @JsFunction
 @FunctionalInterface
 public interface EventHandlerNonNull {
-  @Nonnull
+  @Nullable
   Any onInvoke(@Nonnull Event event);
 }
