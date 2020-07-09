@@ -59,7 +59,6 @@ public class SpeechRecognition extends EventTarget {
   public EventHandlerNonNull onstart;
 
   public SpeechRecognition() {
-    super(  );
   }
 
   public native void abort();

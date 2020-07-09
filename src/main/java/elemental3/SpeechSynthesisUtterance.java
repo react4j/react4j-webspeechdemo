@@ -50,10 +50,8 @@ public class SpeechSynthesisUtterance extends EventTarget {
   public float volume;
 
   public SpeechSynthesisUtterance(@Nonnull final String text) {
-    super(  );
   }
 
   public SpeechSynthesisUtterance() {
-    super(  );
   }
 }

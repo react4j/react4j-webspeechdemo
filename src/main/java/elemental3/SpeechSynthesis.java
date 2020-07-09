@@ -12,11 +12,18 @@ import jsinterop.annotations.JsType;
 @JsType(
     isNative = true,
     namespace = JsPackage.GLOBAL,
-    name = "SpeechSynthesis"
+    name = "Object"
 )
 public class SpeechSynthesis extends EventTarget {
   @Nullable
   public EventHandlerNonNull onvoiceschanged;
+
+  /**
+   * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
+   */
+  @Deprecated
+  SpeechSynthesis() {
+  }
 
   @JsProperty(
       name = "paused"

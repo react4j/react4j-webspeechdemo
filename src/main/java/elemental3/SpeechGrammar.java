@@ -9,11 +9,18 @@ import jsinterop.annotations.JsType;
 @JsType(
     isNative = true,
     namespace = JsPackage.GLOBAL,
-    name = "SpeechGrammar"
+    name = "Object"
 )
 public class SpeechGrammar {
   @Nonnull
   public String src;
 
   public float weight;
+
+  /**
+   * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
+   */
+  @Deprecated
+  SpeechGrammar() {
+  }
 }

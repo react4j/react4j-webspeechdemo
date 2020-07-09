@@ -9,9 +9,16 @@ import jsinterop.annotations.JsType;
 @JsType(
     isNative = true,
     namespace = JsPackage.GLOBAL,
-    name = "SpeechRecognitionResult"
+    name = "Object"
 )
 public class SpeechRecognitionResult {
+  /**
+   * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
+   */
+  @Deprecated
+  SpeechRecognitionResult() {
+  }
+
   @JsProperty(
       name = "isFinal"
   )
