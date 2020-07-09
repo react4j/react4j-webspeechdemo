@@ -54,7 +54,6 @@ abstract class SpeechData
     return Arrays.asList( voices.asArray( new SpeechSynthesisVoice[ voices.length ] ) );
   }
 
-  //TODO: This should not be present because we pass it in via onVoicesActivate
   @ComputableValueRef
   abstract ComputableValue<?> getVoicesComputableValue();
 
