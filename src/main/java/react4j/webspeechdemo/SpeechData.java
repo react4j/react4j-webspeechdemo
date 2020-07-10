@@ -83,7 +83,7 @@ abstract class SpeechData
   }
 
   @Nonnull
-  public SpeechSynthesis getSpeechSynthesis()
+  SpeechSynthesis getSpeechSynthesis()
   {
     return WebSpeechWindow.of( DomGlobal.window ).speechSynthesis();
   }
