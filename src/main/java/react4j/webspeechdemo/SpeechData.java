@@ -39,6 +39,11 @@ abstract class SpeechData
 
   abstract void setSpeaking( boolean speaking );
 
+  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
+  abstract boolean isPaused();
+
+  abstract void setPaused( boolean paused );
+
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
   abstract float getPitch();
 
