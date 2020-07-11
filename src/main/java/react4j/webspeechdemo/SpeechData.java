@@ -33,6 +33,11 @@ abstract class SpeechData
     return new Arez_SpeechData( pitch, rate, volume, text );
   }
 
+  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
+  abstract boolean isSpeaking();
+
+  abstract void setSpeaking( boolean speaking );
+
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
   abstract float getPitch();
 
@@ -97,6 +102,7 @@ abstract class SpeechData
   void stopSpeaking()
   {
     getSpeechSynthesis().cancel();
+    setSpeaking( false );
   }
 
   void restartSpeaking()

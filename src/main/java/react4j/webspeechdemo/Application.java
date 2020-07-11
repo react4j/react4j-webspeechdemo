@@ -49,6 +49,7 @@ abstract class Application
           div( new HtmlProps().id( "textarea" ),
                textarea( new TextAreaProps()
                            .value( _speechData.getText() )
+                           .disabled( _speechData.isSpeaking() )
                            .onChange( e -> _speechData.setText( ( (HTMLTextAreaElement) e.getTarget() ).value ) ) )
           ),
           div( new HtmlProps().className( "speecharg" ),
@@ -59,11 +60,13 @@ abstract class Application
                         .min( "0" )
                         .max( "1" )
                         .step( "0.05" )
+                        .disabled( _speechData.isSpeaking() )
                         .onChange( e -> _speechData.setPitch( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset pitch" ) )
                          .title( "Reset pitch" )
+                         .disabled( _speechData.isSpeaking() )
                          .onClick( e -> _speechData.setPitch( DEFAULT_PITCH ) ),
                        "\u21b6" )
           ),
@@ -75,11 +78,13 @@ abstract class Application
                         .min( "-3" )
                         .max( "3" )
                         .step( "0.25" )
+                        .disabled( _speechData.isSpeaking() )
                         .onChange( e -> _speechData.setRate( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset rate" ) )
                          .title( "Reset rate" )
+                         .disabled( _speechData.isSpeaking() )
                          .onClick( e -> _speechData.setRate( DEFAULT_RATE ) ),
                        "\u21b6" )
           ),
@@ -91,19 +96,23 @@ abstract class Application
                         .min( "0" )
                         .max( "1" )
                         .step( "0.05" )
+                        .disabled( _speechData.isSpeaking() )
                         .onChange( e -> _speechData.setVolume( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) )
                ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset volume" ) )
                          .title( "Reset volume" )
+                         .disabled( _speechData.isSpeaking() )
                          .onClick( e -> _speechData.setVolume( DEFAULT_VOLUME ) ),
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "voice" ), "Voice" ),
                select(
-                 new SelectProps().onChange( this::onVoiceChange )
+                 new SelectProps()
+                   .onChange( this::onVoiceChange )
+                   .disabled( _speechData.isSpeaking() )
                    .value( null == voice ? "" : voice.voiceURI() ),
                  _speechData.getVoices().stream().map( this::renderVoiceOption )
                ),
@@ -111,6 +120,7 @@ abstract class Application
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset voice" ) )
                          .title( "Reset voice" )
+                         .disabled( _speechData.isSpeaking() )
                          .onClick( e -> _speechData.resetVoice() ),
                        "\u21b6" )
           ),
@@ -120,12 +130,14 @@ abstract class Application
                               .type( ButtonType.button )
                               .prop( "aria-label", Js.asAny( "Speak" ) )
                               .title( "Speak" )
+                              .disabled( _speechData.isSpeaking() )
                               .onClick( e -> _speechData.startSpeaking() ),
                             strong( "Speak it" ) ),
                     button( new BtnProps()
                               .type( ButtonType.button )
                               .prop( "aria-label", Js.asAny( "Interrupt" ) )
                               .title( "Interrupt" )
+                              .disabled( !_speechData.isSpeaking() )
                               .onClick( e -> _speechData.restartSpeaking() ),
                             "Interrupt" )
                ),
@@ -134,6 +146,7 @@ abstract class Application
                          .className( "small" )
                          .prop( "aria-label", Js.asAny( "Pause/Resume" ) )
                          .title( "Pause/Resume" )
+                         .disabled( !_speechData.isSpeaking() )
                          .onClick( e -> _speechData.togglePause() ),
                        img( new ImgProps().src( "img/play_pause.svg" ) ) ),
                button( new BtnProps()
@@ -141,6 +154,7 @@ abstract class Application
                          .className( "small" )
                          .prop( "aria-label", Js.asAny( "Cancel" ) )
                          .title( "Cancel" )
+                         .disabled( _speechData.isSpeaking() )
                          .onClick( e -> _speechData.stopSpeaking() ),
                        img( new ImgProps().src( "img/stop.svg" ) ) )
           )
