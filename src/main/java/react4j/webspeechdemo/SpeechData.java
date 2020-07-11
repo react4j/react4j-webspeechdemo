@@ -105,12 +105,6 @@ abstract class SpeechData
     setSpeaking( false );
   }
 
-  void restartSpeaking()
-  {
-    stopSpeaking();
-    startSpeaking();
-  }
-
   void startSpeaking()
   {
   }
