@@ -17,6 +17,7 @@ import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.LabelProps;
 import react4j.dom.proptypes.html.OptionProps;
 import react4j.dom.proptypes.html.SelectProps;
+import react4j.dom.proptypes.html.TextAreaProps;
 import react4j.dom.proptypes.html.attributeTypes.ButtonType;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import static react4j.dom.DOM.*;
@@ -27,8 +28,13 @@ abstract class Application
   private static final double DEFAULT_PITCH = 0.5;
   private static final double DEFAULT_RATE = 0.0;
   private static final double DEFAULT_VOLUME = 1.0;
+  @Nonnull
+  private static final String DEFAULT_TEXT =
+    "Call me Ishmael. Some years ago—never mind how long precisely—having " +
+    "little or no money in my purse, and nothing particular to interest me on shore, I thought " +
+    "I would sail about a little and see the watery part of the world.";
   @CascadeDispose
-  final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME );
+  final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME, DEFAULT_TEXT );
 
   @Nonnull
   @Render
@@ -39,9 +45,9 @@ abstract class Application
         h1( "Web Speech Synthesis Demo" ),
         form(
           div( new HtmlProps().id( "textarea" ),
-               textarea( "Call me Ishmael. Some years ago—never mind how long precisely—having " +
-                         "little or no money in my purse, and nothing particular to interest me on shore, I thought " +
-                         "I would sail about a little and see the watery part of the world." )
+               textarea( new TextAreaProps()
+                           .value( _speechData.getText() )
+                           .onChange( e -> _speechData.setText( ( (HTMLInputElement) e.getTarget() ).value ) ) )
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),

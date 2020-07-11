@@ -28,9 +28,9 @@ abstract class SpeechData
 
   @SuppressWarnings( "SameParameterValue" )
   @Nonnull
-  static SpeechData create( final double pitch, final double rate, final double volume )
+  static SpeechData create( final double pitch, final double rate, final double volume, @Nonnull final String text )
   {
-    return new Arez_SpeechData( pitch, rate, volume );
+    return new Arez_SpeechData( pitch, rate, volume, text );
   }
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
@@ -53,6 +53,12 @@ abstract class SpeechData
   abstract SpeechSynthesisVoice getVoice();
 
   abstract void setVoice( @Nullable SpeechSynthesisVoice voice );
+
+  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
+  @Nonnull
+  abstract String getText();
+
+  abstract void setText( @Nonnull String text );
 
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   List<SpeechSynthesisVoice> getVoices()
