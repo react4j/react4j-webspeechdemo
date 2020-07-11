@@ -135,7 +135,7 @@ abstract class SpeechData
   }
 
   @Nullable
-  private SpeechSynthesisVoice getDefaultVoice()
+  SpeechSynthesisVoice getDefaultVoice()
   {
     return getVoices().stream().filter( SpeechSynthesisVoice::_default ).findAny().orElse( null );
   }
