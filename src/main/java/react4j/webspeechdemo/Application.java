@@ -40,6 +40,7 @@ abstract class Application
   @Render
   ReactNode render()
   {
+    final SpeechSynthesisVoice voice = _speechData.getVoice();
     return
       fragment(
         h1( "Web Speech Synthesis Demo" ),
@@ -101,7 +102,8 @@ abstract class Application
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "voice" ), "Voice" ),
                select(
-                 new SelectProps().onChange( this::onVoiceChange ),
+                 new SelectProps().onChange( this::onVoiceChange )
+                   .value( null == voice ? "" : voice.voiceURI() ),
                  _speechData.getVoices().stream().map( this::renderVoiceOption )
                ),
                button( new BtnProps()
@@ -149,11 +151,7 @@ abstract class Application
   @Nonnull
   private ReactNode renderVoiceOption( @Nonnull final SpeechSynthesisVoice voice )
   {
-    final SpeechSynthesisVoice currentVoice = _speechData.getVoice();
-    return option( new OptionProps()
-                     .value( voice.voiceURI() )
-                     .selected( ( null == currentVoice && voice._default() ) || currentVoice == voice ),
-                   voice.name() + " (" + voice.lang() + ")" );
+    return option( new OptionProps().value( voice.voiceURI() ), voice.name() + " (" + voice.lang() + ")" );
   }
 
   void onVoiceChange( @Nonnull final FormEvent e )
