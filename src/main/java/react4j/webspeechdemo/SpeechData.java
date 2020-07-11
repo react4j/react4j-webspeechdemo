@@ -87,4 +87,50 @@ abstract class SpeechData
   {
     return WebSpeechWindow.of( DomGlobal.window ).speechSynthesis();
   }
+
+  void stopSpeaking()
+  {
+    getSpeechSynthesis().cancel();
+  }
+
+  void restartSpeaking()
+  {
+    stopSpeaking();
+    startSpeaking();
+  }
+
+  void startSpeaking()
+  {
+  }
+
+  void togglePause()
+  {
+    final SpeechSynthesis speechSynthesis = getSpeechSynthesis();
+    if ( speechSynthesis.paused() )
+    {
+      speechSynthesis.resume();
+    }
+    else
+    {
+      speechSynthesis.pause();
+    }
+  }
+
+  @Action
+  void resetVoice()
+  {
+    setVoice( getDefaultVoice() );
+  }
+
+  @Action
+  void setVoiceByVoiceURI( @Nonnull final String voiceURI )
+  {
+    setVoice( getVoices().stream().filter( v -> v.voiceURI().equals( voiceURI ) ).findFirst().orElse( null ) );
+  }
+
+  @Nullable
+  private SpeechSynthesisVoice getDefaultVoice()
+  {
+    return getVoices().stream().filter( SpeechSynthesisVoice::_default ).findAny().orElse( null );
+  }
 }
