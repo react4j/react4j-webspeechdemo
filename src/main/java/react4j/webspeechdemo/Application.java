@@ -1,8 +1,6 @@
 package react4j.webspeechdemo;
 
-import arez.annotations.Action;
 import arez.annotations.CascadeDispose;
-import elemental2.dom.Element;
 import elemental2.dom.HTMLInputElement;
 import elemental2.dom.HTMLSelectElement;
 import elemental3.SpeechSynthesisVoice;
@@ -104,7 +102,7 @@ abstract class Application
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset voice" ) )
                          .title( "Reset voice" )
-                         .onClick( e -> onResetVoiceClick() ),
+                         .onClick( e -> _speechData.resetVoice() ),
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "bottom" ),
@@ -113,13 +111,13 @@ abstract class Application
                               .type( ButtonType.button )
                               .prop( "aria-label", Js.asAny( "Speak" ) )
                               .title( "Speak" )
-                              .onClick( e -> onSpeakClick() ),
+                              .onClick( e -> _speechData.startSpeaking() ),
                             strong( "Speak it" ) ),
                     button( new BtnProps()
                               .type( ButtonType.button )
                               .prop( "aria-label", Js.asAny( "Interrupt" ) )
                               .title( "Interrupt" )
-                              .onClick( e -> onInterruptClick() ),
+                              .onClick( e -> _speechData.restartSpeaking() ),
                             "Interrupt" )
                ),
                button( new BtnProps()
@@ -127,14 +125,14 @@ abstract class Application
                          .className( "small" )
                          .prop( "aria-label", Js.asAny( "Pause/Resume" ) )
                          .title( "Pause/Resume" )
-                         .onClick( e -> onPlayPauseClick() ),
+                         .onClick( e -> _speechData.togglePause() ),
                        img( new ImgProps().src( "img/play_pause.svg" ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .className( "small" )
                          .prop( "aria-label", Js.asAny( "Cancel" ) )
                          .title( "Cancel" )
-                         .onClick( e -> onCancelClick() ),
+                         .onClick( e -> _speechData.stopSpeaking() ),
                        img( new ImgProps().src( "img/stop.svg" ) ) )
           )
         ),
@@ -152,35 +150,8 @@ abstract class Application
                    voice.name() + " (" + voice.lang() + ")" );
   }
 
-  @Action
   void onVoiceChange( @Nonnull final FormEvent e )
   {
-    final Element target = e.getTarget();
-    final String value = ( (HTMLSelectElement) target ).value;
-    _speechData.setVoice( _speechData.getVoices()
-                            .stream()
-                            .filter( v -> v.voiceURI().equals( value ) )
-                            .findFirst()
-                            .orElse( null ) );
-  }
-
-  private void onCancelClick()
-  {
-  }
-
-  private void onPlayPauseClick()
-  {
-  }
-
-  private void onInterruptClick()
-  {
-  }
-
-  private void onSpeakClick()
-  {
-  }
-
-  private void onResetVoiceClick()
-  {
+    _speechData.setVoiceByVoiceURI( ( (HTMLSelectElement) e.getTarget() ).value );
   }
 }
