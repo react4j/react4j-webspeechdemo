@@ -14,7 +14,6 @@ import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.dom.proptypes.html.HtmlProps;
-import react4j.dom.proptypes.html.ImgProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.LabelProps;
 import react4j.dom.proptypes.html.OptionProps;
@@ -133,38 +132,39 @@ abstract class Application
                        "\u21b6" )
           ),
           div( new HtmlProps().className( "bottom" ),
-               div( new HtmlProps().className( "widebutton" ),
-                    button( new BtnProps()
-                              .type( ButtonType.button )
-                              .prop( "aria-label", Js.asAny( "Speak" ) )
-                              .title( "Speak" )
-                              .disabled( _speechData.isSpeaking() )
-                              .onClick( e -> _speechData.startSpeaking() ),
-                            strong( "Speak it" ) ),
-                    button( new BtnProps()
-                              .type( ButtonType.button )
-                              .prop( "aria-label", Js.asAny( "Interrupt" ) )
-                              .title( "Interrupt" )
-                              .disabled( !_speechData.isSpeaking() )
-                              .onClick( e -> _speechData.restartSpeaking() ),
-                            "Interrupt" )
-               ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .className( "small" )
-                         .prop( "aria-label", Js.asAny( "Pause/Resume" ) )
-                         .title( "Pause/Resume" )
-                         .disabled( !_speechData.isSpeaking() )
-                         .onClick( e -> _speechData.togglePause() ),
-                       img( new ImgProps().src( "img/play_pause.svg" ) ) ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .className( "small" )
-                         .prop( "aria-label", Js.asAny( "Cancel" ) )
-                         .title( "Cancel" )
+                         .prop( "aria-label", Js.asAny( "Speak" ) )
+                         .title( "Speak" )
                          .disabled( _speechData.isSpeaking() )
+                         .onClick( e -> _speechData.startSpeaking() ),
+                       "Speak" ),
+               button( new BtnProps()
+                         .type( ButtonType.button )
+                         .className( "small" )
+                         .prop( "aria-label", Js.asAny( _speechData.isPaused() ? "Resume" : "Pause" ) )
+                         .title( _speechData.isPaused() ? "Resume" : "Pause" )
+                         .disabled( !_speechData.isSpeaking() )
+                         .onClick( e -> {
+                           if ( _speechData.isPaused() )
+                           {
+                             _speechData.resume();
+                           }
+                           else
+                           {
+                             _speechData.pause();
+                           }
+                         } ),
+                       _speechData.isPaused() ? "Resume" : "Pause" ),
+               button( new BtnProps()
+                         .type( ButtonType.button )
+                         .className( "small" )
+                         .prop( "aria-label", Js.asAny( "Stop" ) )
+                         .title( "Stop" )
+                         .disabled( !_speechData.isSpeaking() )
                          .onClick( e -> _speechData.stopSpeaking() ),
-                       img( new ImgProps().src( "img/stop.svg" ) ) )
+                       "Stop" )
           )
         ),
         div( new HtmlProps().className( "bottom" ) )
