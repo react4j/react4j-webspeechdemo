@@ -8,6 +8,7 @@ import elemental3.SpeechSynthesisVoice;
 import javax.annotation.Nonnull;
 import jsinterop.base.Js;
 import react4j.ReactNode;
+import react4j.annotations.PostMount;
 import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
@@ -36,6 +37,13 @@ abstract class Application
     "I would sail about a little and see the watery part of the world.";
   @CascadeDispose
   final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME, DEFAULT_TEXT );
+
+  @PostMount
+  void postMount()
+  {
+    // In case speech synthesis is still running from a previous run of the application
+    _speechData.stopSpeaking();
+  }
 
   @Nonnull
   @Render
