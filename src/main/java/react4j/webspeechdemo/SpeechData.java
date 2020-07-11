@@ -28,25 +28,25 @@ abstract class SpeechData
 
   @SuppressWarnings( "SameParameterValue" )
   @Nonnull
-  static SpeechData create( final double pitch, final double rate, final double volume, @Nonnull final String text )
+  static SpeechData create( final float pitch, final float rate, final float volume, @Nonnull final String text )
   {
     return new Arez_SpeechData( pitch, rate, volume, text );
   }
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
-  abstract double getPitch();
+  abstract float getPitch();
 
-  abstract void setPitch( double pitch );
-
-  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
-  abstract double getRate();
-
-  abstract void setRate( double rate );
+  abstract void setPitch( float pitch );
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
-  abstract double getVolume();
+  abstract float getRate();
 
-  abstract void setVolume( double volume );
+  abstract void setRate( float rate );
+
+  @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
+  abstract float getVolume();
+
+  abstract void setVolume( float volume );
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
   @Nullable

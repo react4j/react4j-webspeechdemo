@@ -26,9 +26,9 @@ import static react4j.dom.DOM.*;
 @View( type = View.Type.TRACKING )
 abstract class Application
 {
-  private static final double DEFAULT_PITCH = 0.5;
-  private static final double DEFAULT_RATE = 0.0;
-  private static final double DEFAULT_VOLUME = 1.0;
+  private static final float DEFAULT_PITCH = 0.5F;
+  private static final float DEFAULT_RATE = 0.0F;
+  private static final float DEFAULT_VOLUME = 1.0F;
   @Nonnull
   private static final String DEFAULT_TEXT =
     "Call me Ishmael. Some years ago—never mind how long precisely—having " +
@@ -59,7 +59,7 @@ abstract class Application
                         .min( "0" )
                         .max( "1" )
                         .step( "0.05" )
-                        .onChange( e -> _speechData.setPitch( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                        .onChange( e -> _speechData.setPitch( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset pitch" ) )
@@ -75,7 +75,7 @@ abstract class Application
                         .min( "-3" )
                         .max( "3" )
                         .step( "0.25" )
-                        .onChange( e -> _speechData.setRate( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                        .onChange( e -> _speechData.setRate( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
                button( new BtnProps()
                          .type( ButtonType.button )
                          .prop( "aria-label", Js.asAny( "Reset rate" ) )
@@ -91,7 +91,7 @@ abstract class Application
                         .min( "0" )
                         .max( "1" )
                         .step( "0.05" )
-                        .onChange( e -> _speechData.setVolume( Double.parseDouble( ( (HTMLInputElement) e.getTarget() ).value ) ) )
+                        .onChange( e -> _speechData.setVolume( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) )
                ),
                button( new BtnProps()
                          .type( ButtonType.button )
