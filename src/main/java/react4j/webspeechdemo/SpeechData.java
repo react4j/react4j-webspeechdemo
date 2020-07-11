@@ -8,6 +8,7 @@ import arez.annotations.DepType;
 import arez.annotations.Feature;
 import arez.annotations.Memoize;
 import arez.annotations.Observable;
+import arez.annotations.Observe;
 import arez.annotations.OnActivate;
 import arez.annotations.OnDeactivate;
 import elemental2.core.JsArray;
@@ -91,6 +92,17 @@ abstract class SpeechData
   void triggerRecalculation( @Nonnull final ComputableValue<?> computableValue )
   {
     computableValue.reportPossiblyChanged();
+  }
+
+  @Observe( mutation = true )
+  void maintainCurrentVoice()
+  {
+    final List<SpeechSynthesisVoice> voices = getVoices();
+    final SpeechSynthesisVoice voice = getVoice();
+    if ( null == voice || !voices.contains( voice ) )
+    {
+      setVoice( getDefaultVoice() );
+    }
   }
 
   @Nonnull
