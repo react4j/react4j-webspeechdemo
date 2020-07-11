@@ -15,6 +15,8 @@ import elemental2.core.JsArray;
 import elemental2.dom.DomGlobal;
 import elemental3.EventListener;
 import elemental3.SpeechSynthesis;
+import elemental3.SpeechSynthesisEvent;
+import elemental3.SpeechSynthesisUtterance;
 import elemental3.SpeechSynthesisVoice;
 import java.util.Arrays;
 import java.util.List;
@@ -124,19 +126,45 @@ abstract class SpeechData
 
   void startSpeaking()
   {
+    final SpeechSynthesisUtterance utterance = new SpeechSynthesisUtterance( getText() );
+    utterance.voice = getVoice();
+    utterance.volume = getVolume();
+    utterance.pitch = getPitch();
+    final float rate = getRate();
+    utterance.rate = (float) Math.pow( Math.abs( rate ) + 1, rate < 0 ? -1 : 1 );
+    utterance.addEventListener( "start", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.addEventListener( "end", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.addEventListener( "error", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.addEventListener( "boundary", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    getSpeechSynthesis().speak( utterance );
+    setSpeaking( true );
   }
 
-  void togglePause()
+  private void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
   {
-    final SpeechSynthesis speechSynthesis = getSpeechSynthesis();
-    if ( speechSynthesis.paused() )
+    switch ( event.type() )
     {
-      speechSynthesis.resume();
+      case "start":
+        break;
+      case "error":
+      case "end":
+        setSpeaking( false );
+        break;
+      case "boundary":
+        break;
     }
-    else
-    {
-      speechSynthesis.pause();
-    }
+  }
+
+  void pause()
+  {
+    getSpeechSynthesis().pause();
+    setPaused( true );
+  }
+
+  void resume()
+  {
+    getSpeechSynthesis().resume();
+    setPaused( false );
   }
 
   @Action
