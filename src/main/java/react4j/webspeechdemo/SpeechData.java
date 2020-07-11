@@ -36,11 +36,13 @@ abstract class SpeechData
     return new Arez_SpeechData( pitch, rate, volume, text );
   }
 
+  // TODO: We should derive this from the underlying API make sure it tracked by ComputedValue
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
   abstract boolean isSpeaking();
 
   abstract void setSpeaking( boolean speaking );
 
+  // TODO: We should derive this from the underlying API make sure it tracked by ComputedValue
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
   abstract boolean isPaused();
 
