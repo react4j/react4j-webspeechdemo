@@ -3,6 +3,7 @@ package react4j.webspeechdemo;
 import arez.annotations.CascadeDispose;
 import elemental2.dom.HTMLInputElement;
 import elemental2.dom.HTMLSelectElement;
+import elemental2.dom.HTMLTextAreaElement;
 import elemental3.SpeechSynthesisVoice;
 import javax.annotation.Nonnull;
 import jsinterop.base.Js;
@@ -48,7 +49,7 @@ abstract class Application
           div( new HtmlProps().id( "textarea" ),
                textarea( new TextAreaProps()
                            .value( _speechData.getText() )
-                           .onChange( e -> _speechData.setText( ( (HTMLInputElement) e.getTarget() ).value ) ) )
+                           .onChange( e -> _speechData.setText( ( (HTMLTextAreaElement) e.getTarget() ).value ) ) )
           ),
           div( new HtmlProps().className( "speecharg" ),
                label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
