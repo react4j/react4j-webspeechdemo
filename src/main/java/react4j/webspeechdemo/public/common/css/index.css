@@ -116,5 +116,4 @@ input[type=range]::-moz-range-track {
 #textbeingspoken {
   color: #aaa;
   overflow: auto;
-  transition: all 100ms ease;
 }
