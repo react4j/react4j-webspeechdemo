@@ -1,11 +1,18 @@
 package react4j.webspeechdemo;
 
 import arez.annotations.CascadeDispose;
+import elemental2.dom.DOMRect;
+import elemental2.dom.DocumentRange;
+import elemental2.dom.DomGlobal;
+import elemental2.dom.HTMLBodyElement;
+import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLInputElement;
 import elemental2.dom.HTMLSelectElement;
 import elemental2.dom.HTMLTextAreaElement;
+import elemental2.dom.Range;
 import elemental3.SpeechSynthesisVoice;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import jsinterop.base.Js;
 import react4j.ReactNode;
 import react4j.annotations.PostMount;
@@ -13,6 +20,7 @@ import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.BtnProps;
+import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.LabelProps;
@@ -36,6 +44,8 @@ abstract class Application
     "I would sail about a little and see the watery part of the world.";
   @CascadeDispose
   final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME, DEFAULT_TEXT );
+  @Nullable
+  private HTMLDivElement _textContent;
 
   @PostMount
   void postMount()
@@ -50,124 +60,130 @@ abstract class Application
   {
     final SpeechSynthesisVoice voice = _speechData.getVoice();
     return
-      fragment(
-        h1( "Web Speech Synthesis Demo" ),
-        form(
-          div( new HtmlProps().id( "textarea" ),
-               textarea( new TextAreaProps()
-                           .value( _speechData.getText() )
+      div( new HtmlProps().className( _speechData.isSpeaking() ? "speaking" : null ),
+           h1( "Web Speech Synthesis Demo" ),
+           form(
+             div( new HtmlProps().id( "textarea" ),
+                  _speechData.isSpeaking() ?
+                  fragment(
+                    div( new HtmlProps().ref( e -> _textContent = ( (HTMLDivElement) e ) ).id( "textbeingspoken" ),
+                         _speechData.getText() ),
+                    div( new HtmlProps().style( markerCssProps() ) )
+                  ) :
+                  textarea( new TextAreaProps()
+                              .value( _speechData.getText() )
+                              .disabled( _speechData.isSpeaking() )
+                              .onChange( e -> _speechData.setText( ( (HTMLTextAreaElement) e.getTarget() ).value ) ) )
+             ),
+             div( new HtmlProps().className( "speecharg" ),
+                  label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
+                  input( new InputProps().id( "pitch" )
+                           .type( InputType.range )
+                           .value( String.valueOf( _speechData.getPitch() ) )
+                           .min( "0" )
+                           .max( "1" )
+                           .step( "0.05" )
                            .disabled( _speechData.isSpeaking() )
-                           .onChange( e -> _speechData.setText( ( (HTMLTextAreaElement) e.getTarget() ).value ) ) )
-          ),
-          div( new HtmlProps().className( "speecharg" ),
-               label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
-               input( new InputProps().id( "pitch" )
-                        .type( InputType.range )
-                        .value( String.valueOf( _speechData.getPitch() ) )
-                        .min( "0" )
-                        .max( "1" )
-                        .step( "0.05" )
-                        .disabled( _speechData.isSpeaking() )
-                        .onChange( e -> _speechData.setPitch( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .prop( "aria-label", Js.asAny( "Reset pitch" ) )
-                         .title( "Reset pitch" )
-                         .disabled( _speechData.isSpeaking() )
-                         .onClick( e -> _speechData.setPitch( DEFAULT_PITCH ) ),
-                       "\u21b6" )
-          ),
-          div( new HtmlProps().className( "speecharg" ),
-               label( new LabelProps().htmlFor( "rate" ), "Rate" ),
-               input( new InputProps().id( "rate" )
-                        .type( InputType.range )
-                        .value( String.valueOf( _speechData.getRate() ) )
-                        .min( "-3" )
-                        .max( "3" )
-                        .step( "0.25" )
-                        .disabled( _speechData.isSpeaking() )
-                        .onChange( e -> _speechData.setRate( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .prop( "aria-label", Js.asAny( "Reset rate" ) )
-                         .title( "Reset rate" )
-                         .disabled( _speechData.isSpeaking() )
-                         .onClick( e -> _speechData.setRate( DEFAULT_RATE ) ),
-                       "\u21b6" )
-          ),
-          div( new HtmlProps().className( "speecharg" ),
-               label( new LabelProps().htmlFor( "volume" ), "Volume" ),
-               input( new InputProps().id( "volume" )
-                        .type( InputType.range )
-                        .value( String.valueOf( _speechData.getVolume() ) )
-                        .min( "0" )
-                        .max( "1" )
-                        .step( "0.05" )
-                        .disabled( _speechData.isSpeaking() )
-                        .onChange( e -> _speechData.setVolume( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) )
-               ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .prop( "aria-label", Js.asAny( "Reset volume" ) )
-                         .title( "Reset volume" )
-                         .disabled( _speechData.isSpeaking() )
-                         .onClick( e -> _speechData.setVolume( DEFAULT_VOLUME ) ),
-                       "\u21b6" )
-          ),
-          div( new HtmlProps().className( "speecharg" ),
-               label( new LabelProps().htmlFor( "voice" ), "Voice" ),
-               select(
-                 new SelectProps()
-                   .onChange( this::onVoiceChange )
-                   .disabled( _speechData.isSpeaking() )
-                   .value( null == voice ? "" : voice.voiceURI() ),
-                 _speechData.getVoices().stream().map( this::renderVoiceOption )
-               ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .prop( "aria-label", Js.asAny( "Reset voice" ) )
-                         .title( "Reset voice" )
-                         .disabled( _speechData.isSpeaking() )
-                         .onClick( e -> _speechData.resetVoice() ),
-                       "\u21b6" )
-          ),
-          div( new HtmlProps().className( "bottom" ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .className( "small" )
-                         .prop( "aria-label", Js.asAny( "Speak" ) )
-                         .title( "Speak" )
-                         .disabled( _speechData.isSpeaking() )
-                         .onClick( e -> _speechData.startSpeaking() ),
-                       "Speak" ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .className( "small" )
-                         .prop( "aria-label", Js.asAny( _speechData.isPaused() ? "Resume" : "Pause" ) )
-                         .title( _speechData.isPaused() ? "Resume" : "Pause" )
-                         .disabled( !_speechData.isSpeaking() )
-                         .onClick( e -> {
-                           if ( _speechData.isPaused() )
-                           {
-                             _speechData.resume();
-                           }
-                           else
-                           {
-                             _speechData.pause();
-                           }
-                         } ),
-                       _speechData.isPaused() ? "Resume" : "Pause" ),
-               button( new BtnProps()
-                         .type( ButtonType.button )
-                         .className( "small" )
-                         .prop( "aria-label", Js.asAny( "Stop" ) )
-                         .title( "Stop" )
-                         .disabled( !_speechData.isSpeaking() )
-                         .onClick( e -> _speechData.stopSpeaking() ),
-                       "Stop" )
-          )
-        ),
-        div( new HtmlProps().className( "bottom" ) )
+                           .onChange( e -> _speechData.setPitch( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .prop( "aria-label", Js.asAny( "Reset pitch" ) )
+                            .title( "Reset pitch" )
+                            .disabled( _speechData.isSpeaking() )
+                            .onClick( e -> _speechData.setPitch( DEFAULT_PITCH ) ),
+                          "\u21b6" )
+             ),
+             div( new HtmlProps().className( "speecharg" ),
+                  label( new LabelProps().htmlFor( "rate" ), "Rate" ),
+                  input( new InputProps().id( "rate" )
+                           .type( InputType.range )
+                           .value( String.valueOf( _speechData.getRate() ) )
+                           .min( "-3" )
+                           .max( "3" )
+                           .step( "0.25" )
+                           .disabled( _speechData.isSpeaking() )
+                           .onChange( e -> _speechData.setRate( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .prop( "aria-label", Js.asAny( "Reset rate" ) )
+                            .title( "Reset rate" )
+                            .disabled( _speechData.isSpeaking() )
+                            .onClick( e -> _speechData.setRate( DEFAULT_RATE ) ),
+                          "\u21b6" )
+             ),
+             div( new HtmlProps().className( "speecharg" ),
+                  label( new LabelProps().htmlFor( "volume" ), "Volume" ),
+                  input( new InputProps().id( "volume" )
+                           .type( InputType.range )
+                           .value( String.valueOf( _speechData.getVolume() ) )
+                           .min( "0" )
+                           .max( "1" )
+                           .step( "0.05" )
+                           .disabled( _speechData.isSpeaking() )
+                           .onChange( e -> _speechData.setVolume( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) )
+                  ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .prop( "aria-label", Js.asAny( "Reset volume" ) )
+                            .title( "Reset volume" )
+                            .disabled( _speechData.isSpeaking() )
+                            .onClick( e -> _speechData.setVolume( DEFAULT_VOLUME ) ),
+                          "\u21b6" )
+             ),
+             div( new HtmlProps().className( "speecharg" ),
+                  label( new LabelProps().htmlFor( "voice" ), "Voice" ),
+                  select(
+                    new SelectProps()
+                      .onChange( this::onVoiceChange )
+                      .disabled( _speechData.isSpeaking() )
+                      .value( null == voice ? "" : voice.voiceURI() ),
+                    _speechData.getVoices().stream().map( this::renderVoiceOption )
+                  ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .prop( "aria-label", Js.asAny( "Reset voice" ) )
+                            .title( "Reset voice" )
+                            .disabled( _speechData.isSpeaking() )
+                            .onClick( e -> _speechData.resetVoice() ),
+                          "\u21b6" )
+             ),
+             div( new HtmlProps().className( "bottom" ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .className( "small" )
+                            .prop( "aria-label", Js.asAny( "Speak" ) )
+                            .title( "Speak" )
+                            .disabled( _speechData.isSpeaking() )
+                            .onClick( e -> _speechData.startSpeaking() ),
+                          "Speak" ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .className( "small" )
+                            .prop( "aria-label", Js.asAny( _speechData.isPaused() ? "Resume" : "Pause" ) )
+                            .title( _speechData.isPaused() ? "Resume" : "Pause" )
+                            .disabled( !_speechData.isSpeaking() )
+                            .onClick( e -> {
+                              if ( _speechData.isPaused() )
+                              {
+                                _speechData.resume();
+                              }
+                              else
+                              {
+                                _speechData.pause();
+                              }
+                            } ),
+                          _speechData.isPaused() ? "Resume" : "Pause" ),
+                  button( new BtnProps()
+                            .type( ButtonType.button )
+                            .className( "small" )
+                            .prop( "aria-label", Js.asAny( "Stop" ) )
+                            .title( "Stop" )
+                            .disabled( !_speechData.isSpeaking() )
+                            .onClick( e -> _speechData.stopSpeaking() ),
+                          "Stop" )
+             )
+           ),
+           div( new HtmlProps().className( "bottom" ) )
       );
   }
 
@@ -180,5 +196,43 @@ abstract class Application
   void onVoiceChange( @Nonnull final FormEvent e )
   {
     _speechData.setVoiceByVoiceURI( ( (HTMLSelectElement) e.getTarget() ).value );
+  }
+
+  @Nullable
+  private DOMRect deriveUtteranceBounds()
+  {
+    final int length = _speechData.utteredWordLength();
+    if ( 0 != length && null != _textContent )
+    {
+      final DocumentRange documentRange = Js.uncheckedCast( DomGlobal.document );
+      //noinspection ConstantConditions
+      assert null != documentRange;
+      final Range range = documentRange.createRange();
+      final int offset = _speechData.utteredWordOffset();
+      range.setStart( _textContent.firstChild, offset );
+      range.setEnd( _textContent.firstChild, offset + length );
+      return range.getBoundingClientRect();
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  @Nonnull
+  private CssProps markerCssProps()
+  {
+    final DOMRect markerRect = deriveUtteranceBounds();
+    final HTMLBodyElement body = DomGlobal.document.body;
+    final int length = _speechData.utteredWordLength();
+
+    return new CssProps()
+      .position( "fixed" )
+      .border( "1px solid orange" )
+      .transition( 0 == length ? "all 0s ease 0s" : "all 50ms ease" )
+      .top( null == markerRect ? "0" : ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight + 8 ) + "px" ) )
+      .left( null == markerRect ? "0" : ( ( markerRect.left - 1 + body.clientWidth - body.scrollWidth - 8 ) + "px" ) )
+      .width( null == markerRect ? "0" : ( markerRect.width + "px" ) )
+      .height( null == markerRect ? "0" : ( markerRect.height + "px" ) );
   }
 }
