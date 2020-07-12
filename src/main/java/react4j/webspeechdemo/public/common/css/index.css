@@ -126,14 +126,7 @@ input[type=range]::-moz-range-track {
 
 #textbeingspoken {
   color: #aaa;
-  visibility: hidden;
-  opacity: 0;
   overflow: auto;
   transition: all 100ms ease;
   -webkit-transition: all 100ms ease;
-}
-
-.speaking #textbeingspoken {
-  visibility: visible;
-  opacity: 1;
 }
