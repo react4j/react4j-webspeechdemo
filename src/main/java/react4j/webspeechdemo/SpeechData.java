@@ -138,6 +138,8 @@ abstract class SpeechData
     utterance.addEventListener( "end", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "error", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "boundary", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.addEventListener( "pause", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.addEventListener( "resume", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     setSpeaking( true );
     speechSynthesis().speak( utterance );
   }
@@ -151,6 +153,9 @@ abstract class SpeechData
       case "error":
       case "end":
         setSpeaking( false );
+        break;
+      case "pause":
+      case "resume":
         break;
       case "boundary":
         break;
