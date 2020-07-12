@@ -78,7 +78,7 @@ abstract class SpeechData
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   List<SpeechSynthesisVoice> getVoices()
   {
-    final JsArray<SpeechSynthesisVoice> voices = getSpeechSynthesis().getVoices();
+    final JsArray<SpeechSynthesisVoice> voices = speechSynthesis().getVoices();
     return Arrays.asList( voices.asArray( new SpeechSynthesisVoice[ voices.length ] ) );
   }
 
@@ -88,13 +88,13 @@ abstract class SpeechData
   @OnActivate
   void onVoicesActivate()
   {
-    getSpeechSynthesis().addEventListener( "voiceschanged", _eventListener );
+    speechSynthesis().addEventListener( "voiceschanged", _eventListener );
   }
 
   @OnDeactivate
   void onVoicesDeactivate()
   {
-    getSpeechSynthesis().removeEventListener( "voiceschanged", _eventListener );
+    speechSynthesis().removeEventListener( "voiceschanged", _eventListener );
   }
 
   @Action
@@ -115,14 +115,14 @@ abstract class SpeechData
   }
 
   @Nonnull
-  SpeechSynthesis getSpeechSynthesis()
+  private SpeechSynthesis speechSynthesis()
   {
     return WebSpeechWindow.of( DomGlobal.window ).speechSynthesis();
   }
 
   void stopSpeaking()
   {
-    getSpeechSynthesis().cancel();
+    speechSynthesis().cancel();
     setSpeaking( false );
   }
 
@@ -138,8 +138,8 @@ abstract class SpeechData
     utterance.addEventListener( "end", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "error", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "boundary", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    getSpeechSynthesis().speak( utterance );
     setSpeaking( true );
+    speechSynthesis().speak( utterance );
   }
 
   private void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
@@ -159,13 +159,13 @@ abstract class SpeechData
 
   void pause()
   {
-    getSpeechSynthesis().pause();
+    speechSynthesis().pause();
     setPaused( true );
   }
 
   void resume()
   {
-    getSpeechSynthesis().resume();
+    speechSynthesis().resume();
     setPaused( false );
   }
 
