@@ -181,14 +181,11 @@ abstract class SpeechData
       // more effort.
       speechSynthesis().cancel();
     }
-    else if ( "boundary".equals( type ) )
+    else if ( "boundary".equals( type ) && event.name().equals( "word" ) )
     {
-      if ( event.name().equals( "word" ) )
-      {
-        setUtteredWordOffset( event.charIndex() );
-        setUtteredWordLength( event.charLength() );
-        // DomGlobal.console.log( "Word uttered: " + getText().substring( event.charIndex(), event.charIndex() + event.charLength() ) );
-      }
+      setUtteredWordOffset( event.charIndex() );
+      setUtteredWordLength( event.charLength() );
+      // DomGlobal.console.log( "Word uttered: " + getText().substring( event.charIndex(), event.charIndex() + event.charLength() ) );
     }
   }
 
