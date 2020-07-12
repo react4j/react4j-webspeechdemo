@@ -36,13 +36,29 @@ abstract class SpeechData
     return new Arez_SpeechData( pitch, rate, volume, text );
   }
 
-  // TODO: We should derive this from the underlying API make sure it tracked by ComputedValue
+  @Memoize( name = "speaking", readOutsideTransaction = Feature.ENABLE, depType = DepType.AREZ_OR_EXTERNAL )
+  boolean isSpeaking()
+  {
+    return speechSynthesis().speaking();
+  }
+
+  @ComputableValueRef
+  abstract ComputableValue<?> getSpeakingComputableValue();
+
+  @Memoize( name = "paused", readOutsideTransaction = Feature.ENABLE, depType = DepType.AREZ_OR_EXTERNAL )
+  boolean isPaused()
+  {
+    return speechSynthesis().paused();
+  }
+
+  @ComputableValueRef
+  abstract ComputableValue<?> getPausedComputableValue();
+
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
   abstract boolean isSpeaking();
 
   abstract void setSpeaking( boolean speaking );
 
-  // TODO: We should derive this from the underlying API make sure it tracked by ComputedValue
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
   abstract boolean isPaused();
 
@@ -123,7 +139,6 @@ abstract class SpeechData
   void stopSpeaking()
   {
     speechSynthesis().cancel();
-    setSpeaking( false );
   }
 
   void startSpeaking()
@@ -140,7 +155,6 @@ abstract class SpeechData
     utterance.addEventListener( "boundary", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "pause", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
     utterance.addEventListener( "resume", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    setSpeaking( true );
     speechSynthesis().speak( utterance );
   }
 
@@ -150,13 +164,18 @@ abstract class SpeechData
     switch ( event.type() )
     {
       case "start":
+        getSpeakingComputableValue().reportPossiblyChanged();
+        getPausedComputableValue().reportPossiblyChanged();
         break;
       case "error":
       case "end":
-        setSpeaking( false );
+        getSpeakingComputableValue().reportPossiblyChanged();
+        getPausedComputableValue().reportPossiblyChanged();
         break;
       case "pause":
       case "resume":
+        getSpeakingComputableValue().reportPossiblyChanged();
+        getPausedComputableValue().reportPossiblyChanged();
         break;
       case "boundary":
         break;
@@ -166,13 +185,11 @@ abstract class SpeechData
   void pause()
   {
     speechSynthesis().pause();
-    setPaused( true );
   }
 
   void resume()
   {
     speechSynthesis().resume();
-    setPaused( false );
   }
 
   @Action
