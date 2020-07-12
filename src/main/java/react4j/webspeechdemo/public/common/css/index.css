@@ -74,7 +74,6 @@ input[type=range]::-moz-range-track {
 }
 
 .bottom {
-  margin-top: 1rem;
   margin: 1rem 0;
   display: -webkit-flex;
   display: flex;
