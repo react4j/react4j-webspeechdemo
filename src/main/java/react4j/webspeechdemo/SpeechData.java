@@ -55,14 +55,14 @@ abstract class SpeechData
   abstract ComputableValue<?> getPausedComputableValue();
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
-  abstract boolean isSpeaking();
+  abstract int utteredWordOffset();
 
-  abstract void setSpeaking( boolean speaking );
+  abstract void setUtteredWordOffset( int utteredWordOffset );
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE )
-  abstract boolean isPaused();
+  abstract int utteredWordLength();
 
-  abstract void setPaused( boolean paused );
+  abstract void setUtteredWordLength( int utteredWordLength );
 
   @Observable( readOutsideTransaction = Feature.ENABLE, writeOutsideTransaction = Feature.ENABLE, initializer = Feature.ENABLE )
   abstract float getPitch();
@@ -143,6 +143,8 @@ abstract class SpeechData
 
   void startSpeaking()
   {
+    setUtteredWordOffset( 0 );
+    setUtteredWordLength( 0 );
     final SpeechSynthesisUtterance utterance = new SpeechSynthesisUtterance( getText() );
     utterance.voice = getVoice();
     utterance.volume = getVolume();
@@ -189,6 +191,11 @@ abstract class SpeechData
         getPausedComputableValue().reportPossiblyChanged();
         break;
       case "boundary":
+        if ( event.name().equals( "word" ) )
+        {
+          setUtteredWordOffset( event.charIndex() );
+          setUtteredWordLength( event.charLength() );
+        }
         break;
     }
   }
