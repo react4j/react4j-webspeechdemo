@@ -226,12 +226,18 @@ abstract class Application
     final HTMLBodyElement body = DomGlobal.document.body;
     final int length = _speechData.utteredWordLength();
 
+    //This margin comes from "margin: .5rem;" in "#textarea > *" css rule
+    final int marginInPixels = 8;
     return new CssProps()
       .position( "fixed" )
       .border( "1px solid orange" )
       .transition( 0 == length ? "all 0s ease 0s" : "all 50ms ease" )
-      .top( null == markerRect ? "0" : ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight + 8 ) + "px" ) )
-      .left( null == markerRect ? "0" : ( ( markerRect.left - 1 + body.clientWidth - body.scrollWidth - 8 ) + "px" ) )
+      .top( null == markerRect ?
+            "0" :
+            ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight + marginInPixels ) + "px" ) )
+      .left( null == markerRect ?
+             "0" :
+             ( ( markerRect.left - 1 + body.clientWidth - body.scrollWidth - marginInPixels ) + "px" ) )
       .width( null == markerRect ? "0" : ( markerRect.width + "px" ) )
       .height( null == markerRect ? "0" : ( markerRect.height + "px" ) );
   }
