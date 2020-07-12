@@ -182,8 +182,7 @@ abstract class Application
                             .onClick( e -> _speechData.stopSpeaking() ),
                           "Stop" )
              )
-           ),
-           div( new HtmlProps().className( "bottom" ) )
+           )
       );
   }
 
