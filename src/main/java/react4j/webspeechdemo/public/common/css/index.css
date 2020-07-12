@@ -159,8 +159,3 @@ a#gh {
   transition: all 50ms ease;
   -webkit-transition: all 50ms ease;
 }
-
-button > img {
-  width: 100%;
-  height: auto;
-}
