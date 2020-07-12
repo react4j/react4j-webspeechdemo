@@ -164,16 +164,16 @@ abstract class SpeechData
   void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
   {
     //DomGlobal.console.log( "Event " + event.type(), event );
-    switch ( event.type() )
+    final String type = event.type();
+    if ( !"boundary".equals( type ) )
     {
-      case "start":
-        getSpeakingComputableValue().reportPossiblyChanged();
-        getPausedComputableValue().reportPossiblyChanged();
-        break;
+      getSpeakingComputableValue().reportPossiblyChanged();
+      getPausedComputableValue().reportPossiblyChanged();
+    }
+    switch ( type )
+    {
       case "error":
       case "end":
-        getSpeakingComputableValue().reportPossiblyChanged();
-        getPausedComputableValue().reportPossiblyChanged();
         if ( speechSynthesis().paused() )
         {
           // After a period of time paused a speech utterance will be stopped
@@ -185,11 +185,6 @@ abstract class SpeechData
           // more effort.
           speechSynthesis().cancel();
         }
-        break;
-      case "pause":
-      case "resume":
-        getSpeakingComputableValue().reportPossiblyChanged();
-        getPausedComputableValue().reportPossiblyChanged();
         break;
       case "boundary":
         if ( event.name().equals( "word" ) )
