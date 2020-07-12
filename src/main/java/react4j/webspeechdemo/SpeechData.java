@@ -171,6 +171,17 @@ abstract class SpeechData
       case "end":
         getSpeakingComputableValue().reportPossiblyChanged();
         getPausedComputableValue().reportPossiblyChanged();
+        if ( speechSynthesis().paused() )
+        {
+          // After a period of time paused a speech utterance will be stopped
+          // by the speech synthesis engine. If we do not explicitly cancel then
+          // the next time we try to start synthesis it will start paused and unable
+          // to resume the existing utterance. (i.e. invoking resume is insufficient)
+          // Cancelling here seems to reset the stat of synthesis engine but it does
+          // lead to odd UI as can not resume from where last left off without a lot
+          // more effort.
+          speechSynthesis().cancel();
+        }
         break;
       case "pause":
       case "resume":
