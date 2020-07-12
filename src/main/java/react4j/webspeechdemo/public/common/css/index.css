@@ -164,13 +164,3 @@ button > img {
   width: 100%;
   height: auto;
 }
-
-.widebutton {
-  width: 9rem;
-}
-
-.widebutton > button {
-  display: block;
-  margin-bottom: 0.25rem;
-  width: 100%;
-}
