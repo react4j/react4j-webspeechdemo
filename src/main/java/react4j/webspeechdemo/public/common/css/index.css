@@ -74,9 +74,6 @@ input[type=range]::-moz-range-track {
   justify-content: space-between;
 }
 
-.bottom > * {
-}
-
 .bottom button.small {
   height: 3.25rem;
   width: 3.25rem;
