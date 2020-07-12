@@ -144,18 +144,3 @@ a#gh {
   display: block;
   font-style: italic;
 }
-
-#marker {
-  position: absolute;
-  visibility: hidden;
-  border: 1px solid orange;
-}
-
-#marker.moved {
-  visibility: visible;
-}
-
-#marker.animate {
-  transition: all 50ms ease;
-  -webkit-transition: all 50ms ease;
-}
