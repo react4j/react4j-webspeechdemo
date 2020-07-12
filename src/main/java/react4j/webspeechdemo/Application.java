@@ -19,6 +19,7 @@ import react4j.annotations.PostMount;
 import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
+import react4j.dom.proptypes.cssPropertyTypes.Visibility;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
@@ -230,6 +231,7 @@ abstract class Application
     return new CssProps()
       .position( "fixed" )
       .border( "1px solid orange" )
+      .display( 0 == length ? "none" : "block" )
       .transition( 0 == length ? "all 0s ease 0s" : "all 50ms ease" )
       .top( null == markerRect ?
             "0" :
