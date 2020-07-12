@@ -144,7 +144,8 @@ abstract class SpeechData
     speechSynthesis().speak( utterance );
   }
 
-  private void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
+  @Action( verifyRequired = false )
+  void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
   {
     switch ( event.type() )
     {
