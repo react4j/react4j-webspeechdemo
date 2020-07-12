@@ -170,30 +170,25 @@ abstract class SpeechData
       getSpeakingComputableValue().reportPossiblyChanged();
       getPausedComputableValue().reportPossiblyChanged();
     }
-    switch ( type )
+    if ( ( "error".equals( type ) || "end".equals( type ) ) && speechSynthesis().paused() )
     {
-      case "error":
-      case "end":
-        if ( speechSynthesis().paused() )
-        {
-          // After a period of time paused a speech utterance will be stopped
-          // by the speech synthesis engine. If we do not explicitly cancel then
-          // the next time we try to start synthesis it will start paused and unable
-          // to resume the existing utterance. (i.e. invoking resume is insufficient)
-          // Cancelling here seems to reset the stat of synthesis engine but it does
-          // lead to odd UI as can not resume from where last left off without a lot
-          // more effort.
-          speechSynthesis().cancel();
-        }
-        break;
-      case "boundary":
-        if ( event.name().equals( "word" ) )
-        {
-          setUtteredWordOffset( event.charIndex() );
-          setUtteredWordLength( event.charLength() );
-          // DomGlobal.console.log( "Word uttered: " + getText().substring( event.charIndex(), event.charIndex() + event.charLength() ) );
-        }
-        break;
+      // After a period of time paused a speech utterance will be stopped
+      // by the speech synthesis engine. If we do not explicitly cancel then
+      // the next time we try to start synthesis it will start paused and unable
+      // to resume the existing utterance. (i.e. invoking resume is insufficient)
+      // Cancelling here seems to reset the stat of synthesis engine but it does
+      // lead to odd UI as can not resume from where last left off without a lot
+      // more effort.
+      speechSynthesis().cancel();
+    }
+    else if ( "boundary".equals( type ) )
+    {
+      if ( event.name().equals( "word" ) )
+      {
+        setUtteredWordOffset( event.charIndex() );
+        setUtteredWordLength( event.charLength() );
+        // DomGlobal.console.log( "Word uttered: " + getText().substring( event.charIndex(), event.charIndex() + event.charLength() ) );
+      }
     }
   }
 
