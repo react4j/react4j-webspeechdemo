@@ -22,8 +22,6 @@ button, select {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
@@ -46,12 +44,9 @@ input[type=range]::-moz-range-track {
 
 .speecharg {
   height: 2rem;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
   align-items: center;
-  -webkit-align-items: center;
 }
 
 .speecharg label {
@@ -75,10 +70,8 @@ input[type=range]::-moz-range-track {
 
 .bottom {
   margin: 1rem 0;
-  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
-  -webkit-justify-content: space-between;
 }
 
 .bottom > * {
@@ -99,7 +92,6 @@ input[type=range]::-moz-range-track {
   position: relative;
   background-color: #fff;
   transition: background-color 100ms ease;
-  -webkit-transition: background-color 100ms ease;
 }
 
 .speaking #textarea {
@@ -128,5 +120,4 @@ input[type=range]::-moz-range-track {
   color: #aaa;
   overflow: auto;
   transition: all 100ms ease;
-  -webkit-transition: all 100ms ease;
 }
