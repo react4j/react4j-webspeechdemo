@@ -31,7 +31,7 @@ abstract class Application
   private static final float DEFAULT_VOLUME = 1.0F;
   @Nonnull
   private static final String DEFAULT_TEXT =
-    "Call me Ishmael. Some years ago—never mind how long precisely—having " +
+    "Call me Ishmael. Some years ago, never mind how long precisely, having " +
     "little or no money in my purse, and nothing particular to interest me on shore, I thought " +
     "I would sail about a little and see the watery part of the world.";
   @CascadeDispose
