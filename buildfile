@@ -1,7 +1,7 @@
 require 'buildr/git_auto_version'
 require 'buildr/gwt'
 
-desc 'React4j WebSpeech Demos'
+desc 'React4j WebSpeech Demo'
 define 'react4j-webspeechdemo' do
   project.group = 'org.realityforge.react4j.webspeechdemo'
   compile.options.source = '1.8'
