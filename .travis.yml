@@ -9,6 +9,12 @@ install:
 - rvm use 2.3.1
 - gem install bundler
 - bundle install
-script: buildr package
+before_install:
+  - openssl aes-256-cbc -K $encrypted_1f7a180fd0a6_key -iv $encrypted_1f7a180fd0a6_iv
+    -in etc/secrets -out ../secrets.tar -d
+  - "(cd ../ && tar xvf secrets.tar)"
+  - chmod 600 ../deploy
+  - eval `ssh-agent -s` && ssh-add ../deploy
+script: buildr package site:deploy_if_candidate_branch
 git:
   depth: false
