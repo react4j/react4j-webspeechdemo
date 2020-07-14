@@ -18,6 +18,7 @@ import elemental3.SpeechSynthesis;
 import elemental3.SpeechSynthesisEvent;
 import elemental3.SpeechSynthesisUtterance;
 import elemental3.SpeechSynthesisVoice;
+import elemental3.Window;
 import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -133,7 +134,7 @@ abstract class SpeechData
   @Nonnull
   private SpeechSynthesis speechSynthesis()
   {
-    return WebSpeechWindow.of( DomGlobal.window ).speechSynthesis();
+    return Window.of( DomGlobal.window ).speechSynthesis();
   }
 
   void stopSpeaking()

@@ -1,6 +1,5 @@
-package react4j.webspeechdemo;
+package elemental3;
 
-import elemental3.SpeechSynthesis;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -11,17 +10,18 @@ import jsinterop.base.Js;
 // TODO: This should be generated. It is also unclear why webtack did not generate an error
 //  when it found un processed partial
 @JsType( isNative = true, name = "Window", namespace = JsPackage.GLOBAL )
-public final class WebSpeechWindow
+public final class Window
 {
   @JsOverlay
   @Nonnull
-  public static WebSpeechWindow of( @Nonnull final Object o )
+  public static Window of( @Nonnull final Object o )
   {
     return Js.cast( o );
   }
 
   // Constructor is only present to support the java compiler
-  private WebSpeechWindow()
+  @Deprecated
+  private Window()
   {
   }
 
