@@ -9,7 +9,7 @@ import jsinterop.base.Any;
 @Generated("org.realityforge.webtack")
 @JsFunction
 @FunctionalInterface
-public interface EventHandlerNonNull {
+public interface EventHandler {
   @Nullable
   Any onInvoke(@Nonnull Event event);
 }

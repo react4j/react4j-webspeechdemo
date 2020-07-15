@@ -10,9 +10,9 @@ import jsinterop.base.Js;
 
 @Generated("org.realityforge.webtack")
 @JsType(
-  isNative = true,
-  namespace = JsPackage.GLOBAL,
-  name = "Window"
+    isNative = true,
+    namespace = JsPackage.GLOBAL,
+    name = "Window"
 )
 public final class Window {
   /**
@@ -29,7 +29,7 @@ public final class Window {
   }
 
   @JsProperty(
-    name = "speechSynthesis"
+      name = "speechSynthesis"
   )
   @Nonnull
   public native SpeechSynthesis speechSynthesis();

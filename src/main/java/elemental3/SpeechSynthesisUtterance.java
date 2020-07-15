@@ -17,25 +17,25 @@ public class SpeechSynthesisUtterance extends EventTarget {
   public String lang;
 
   @Nullable
-  public EventHandlerNonNull onboundary;
+  public EventHandler onboundary;
 
   @Nullable
-  public EventHandlerNonNull onend;
+  public EventHandler onend;
 
   @Nullable
-  public EventHandlerNonNull onerror;
+  public EventHandler onerror;
 
   @Nullable
-  public EventHandlerNonNull onmark;
+  public EventHandler onmark;
 
   @Nullable
-  public EventHandlerNonNull onpause;
+  public EventHandler onpause;
 
   @Nullable
-  public EventHandlerNonNull onresume;
+  public EventHandler onresume;
 
   @Nullable
-  public EventHandlerNonNull onstart;
+  public EventHandler onstart;
 
   public float pitch;
 

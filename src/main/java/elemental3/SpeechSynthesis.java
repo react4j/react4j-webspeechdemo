@@ -16,7 +16,7 @@ import jsinterop.annotations.JsType;
 )
 public class SpeechSynthesis extends EventTarget {
   @Nullable
-  public EventHandlerNonNull onvoiceschanged;
+  public EventHandler onvoiceschanged;
 
   /**
    * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
