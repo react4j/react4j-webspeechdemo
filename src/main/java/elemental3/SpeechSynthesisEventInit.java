@@ -30,11 +30,25 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsProperty
   void setCharIndex(int charIndex);
 
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisEventInit charIndex(int charIndex) {
+    setCharIndex( charIndex );
+    return this;
+  }
+
   @JsProperty
   int getCharLength();
 
   @JsProperty
   void setCharLength(int charLength);
+
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisEventInit charLength(int charLength) {
+    setCharLength( charLength );
+    return this;
+  }
 
   @JsProperty
   float getElapsedTime();
@@ -42,11 +56,25 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsProperty
   void setElapsedTime(float elapsedTime);
 
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisEventInit elapsedTime(float elapsedTime) {
+    setElapsedTime( elapsedTime );
+    return this;
+  }
+
   @JsProperty
   String getName();
 
   @JsProperty
   void setName(@Nonnull String name);
+
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisEventInit name(@Nonnull String name) {
+    setName( name );
+    return this;
+  }
 
   @JsProperty
   @Nonnull
@@ -54,4 +82,11 @@ public interface SpeechSynthesisEventInit extends EventInit {
 
   @JsProperty
   void setUtterance(@Nonnull SpeechSynthesisUtterance utterance);
+
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisEventInit utterance(@Nonnull SpeechSynthesisUtterance utterance) {
+    setUtterance( utterance );
+    return this;
+  }
 }

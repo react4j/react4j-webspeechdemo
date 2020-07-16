@@ -27,4 +27,11 @@ public interface EventListenerOptions {
 
   @JsProperty
   void setCapture(boolean capture);
+
+  @JsOverlay
+  @Nonnull
+  default EventListenerOptions capture(boolean capture) {
+    setCapture( capture );
+    return this;
+  }
 }

@@ -28,9 +28,23 @@ public interface AddEventListenerOptions extends EventListenerOptions {
   @JsProperty
   void setOnce(boolean once);
 
+  @JsOverlay
+  @Nonnull
+  default AddEventListenerOptions once(boolean once) {
+    setOnce( once );
+    return this;
+  }
+
   @JsProperty
   boolean isPassive();
 
   @JsProperty
   void setPassive(boolean passive);
+
+  @JsOverlay
+  @Nonnull
+  default AddEventListenerOptions passive(boolean passive) {
+    setPassive( passive );
+    return this;
+  }
 }

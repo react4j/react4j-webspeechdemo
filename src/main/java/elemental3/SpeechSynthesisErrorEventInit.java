@@ -32,4 +32,11 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
 
   @JsProperty
   void setError(@Nonnull String error);
+
+  @JsOverlay
+  @Nonnull
+  default SpeechSynthesisErrorEventInit error(@Nonnull String error) {
+    setError( error );
+    return this;
+  }
 }
