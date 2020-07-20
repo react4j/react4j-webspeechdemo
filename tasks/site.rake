@@ -49,7 +49,7 @@ task 'site:deploy' => ['site:build'] do
 
     rm_rf "#{local_dir}/webspeechdemo"
     mkdir_p "#{local_dir}/webspeechdemo"
-    cp_r Dir["#{SITE_DIR}/*"], "#{local_dir}/webspeechdemo"
+    cp_r Dir["#{SITE_DIR}/webspeechdemo"], "#{local_dir}/webspeechdemo"
     sh 'git add . -f'
     puts `git commit -m "#{message}"`
     if 0 == $?.exitstatus
