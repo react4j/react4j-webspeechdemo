@@ -45,7 +45,7 @@ task 'site:deploy' => ['site:build'] do
   sh "git clone -b master --depth 1 #{origin_url} #{local_dir}"
 
   in_dir(local_dir) do
-    message ="Update DrumLoop website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
+    message ="Update WebSpeechDemo website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
 
     rm_rf "#{local_dir}/webspeechdemo"
     mkdir_p "#{local_dir}/webspeechdemo"
