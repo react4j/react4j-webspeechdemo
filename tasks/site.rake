@@ -48,8 +48,7 @@ task 'site:deploy' => ['site:build'] do
     message ="Update WebSpeechDemo website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
 
     rm_rf "#{local_dir}/webspeechdemo"
-    mkdir_p "#{local_dir}/webspeechdemo"
-    cp_r Dir["#{SITE_DIR}/webspeechdemo"], "#{local_dir}/webspeechdemo"
+    cp_r Dir["#{SITE_DIR}/webspeechdemo"], local_dir
     sh 'git add . -f'
     puts `git commit -m "#{message}"`
     if 0 == $?.exitstatus
