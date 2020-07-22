@@ -20,10 +20,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @Nonnull
   static SpeechSynthesisErrorEventInit create(@Nonnull final SpeechSynthesisUtterance utterance,
       @Nonnull final String error) {
-    final SpeechSynthesisErrorEventInit $instance$ = Js.uncheckedCast( JsPropertyMap.of() );
-    $instance$.setUtterance( utterance );
-    $instance$.setError( error );
-    return $instance$;
+    return Js.<SpeechSynthesisErrorEventInit>uncheckedCast( JsPropertyMap.of() ).utterance( utterance ).error( error );
   }
 
   @JsProperty
@@ -37,6 +34,70 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @Nonnull
   default SpeechSynthesisErrorEventInit error(@Nonnull String error) {
     setError( error );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit charIndex(int charIndex) {
+    setCharIndex( charIndex );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit charLength(int charLength) {
+    setCharLength( charLength );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit elapsedTime(float elapsedTime) {
+    setElapsedTime( elapsedTime );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit name(@Nonnull String name) {
+    setName( name );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit utterance(@Nonnull SpeechSynthesisUtterance utterance) {
+    setUtterance( utterance );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit bubbles(boolean bubbles) {
+    setBubbles( bubbles );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit cancelable(boolean cancelable) {
+    setCancelable( cancelable );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisErrorEventInit composed(boolean composed) {
+    setComposed( composed );
     return this;
   }
 }

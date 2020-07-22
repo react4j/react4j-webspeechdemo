@@ -19,9 +19,7 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsOverlay
   @Nonnull
   static SpeechSynthesisEventInit create(@Nonnull final SpeechSynthesisUtterance utterance) {
-    final SpeechSynthesisEventInit $instance$ = Js.uncheckedCast( JsPropertyMap.of() );
-    $instance$.setUtterance( utterance );
-    return $instance$;
+    return Js.<SpeechSynthesisEventInit>uncheckedCast( JsPropertyMap.of() ).utterance( utterance );
   }
 
   @JsProperty
@@ -87,6 +85,30 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @Nonnull
   default SpeechSynthesisEventInit utterance(@Nonnull SpeechSynthesisUtterance utterance) {
     setUtterance( utterance );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisEventInit bubbles(boolean bubbles) {
+    setBubbles( bubbles );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisEventInit cancelable(boolean cancelable) {
+    setCancelable( cancelable );
+    return this;
+  }
+
+  @JsOverlay
+  @Nonnull
+  @Override
+  default SpeechSynthesisEventInit composed(boolean composed) {
+    setComposed( composed );
     return this;
   }
 }
