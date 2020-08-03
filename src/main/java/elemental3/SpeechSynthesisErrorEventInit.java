@@ -23,16 +23,18 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
     return Js.<SpeechSynthesisErrorEventInit>uncheckedCast( JsPropertyMap.of() ).utterance( utterance ).error( error );
   }
 
-  @JsProperty
+  @JsProperty(
+      name = "error"
+  )
   @Nonnull
-  String getError();
+  String error();
 
   @JsProperty
   void setError(@Nonnull String error);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisErrorEventInit error(@Nonnull String error) {
+  default SpeechSynthesisErrorEventInit error(@Nonnull final String error) {
     setError( error );
     return this;
   }
@@ -40,7 +42,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit charIndex(int charIndex) {
+  default SpeechSynthesisErrorEventInit charIndex(final int charIndex) {
     setCharIndex( charIndex );
     return this;
   }
@@ -48,7 +50,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit charLength(int charLength) {
+  default SpeechSynthesisErrorEventInit charLength(final int charLength) {
     setCharLength( charLength );
     return this;
   }
@@ -56,7 +58,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit elapsedTime(float elapsedTime) {
+  default SpeechSynthesisErrorEventInit elapsedTime(final float elapsedTime) {
     setElapsedTime( elapsedTime );
     return this;
   }
@@ -64,7 +66,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit name(@Nonnull String name) {
+  default SpeechSynthesisErrorEventInit name(@Nonnull final String name) {
     setName( name );
     return this;
   }
@@ -72,7 +74,8 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit utterance(@Nonnull SpeechSynthesisUtterance utterance) {
+  default SpeechSynthesisErrorEventInit utterance(
+      @Nonnull final SpeechSynthesisUtterance utterance) {
     setUtterance( utterance );
     return this;
   }
@@ -80,7 +83,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit bubbles(boolean bubbles) {
+  default SpeechSynthesisErrorEventInit bubbles(final boolean bubbles) {
     setBubbles( bubbles );
     return this;
   }
@@ -88,7 +91,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit cancelable(boolean cancelable) {
+  default SpeechSynthesisErrorEventInit cancelable(final boolean cancelable) {
     setCancelable( cancelable );
     return this;
   }
@@ -96,7 +99,7 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisErrorEventInit composed(boolean composed) {
+  default SpeechSynthesisErrorEventInit composed(final boolean composed) {
     setComposed( composed );
     return this;
   }

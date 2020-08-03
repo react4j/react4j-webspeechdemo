@@ -22,41 +22,47 @@ public interface EventInit {
     return Js.uncheckedCast( JsPropertyMap.of() );
   }
 
-  @JsProperty
-  boolean isBubbles();
+  @JsProperty(
+      name = "bubbles"
+  )
+  boolean bubbles();
 
   @JsProperty
   void setBubbles(boolean bubbles);
 
   @JsOverlay
   @Nonnull
-  default EventInit bubbles(boolean bubbles) {
+  default EventInit bubbles(final boolean bubbles) {
     setBubbles( bubbles );
     return this;
   }
 
-  @JsProperty
-  boolean isCancelable();
+  @JsProperty(
+      name = "cancelable"
+  )
+  boolean cancelable();
 
   @JsProperty
   void setCancelable(boolean cancelable);
 
   @JsOverlay
   @Nonnull
-  default EventInit cancelable(boolean cancelable) {
+  default EventInit cancelable(final boolean cancelable) {
     setCancelable( cancelable );
     return this;
   }
 
-  @JsProperty
-  boolean isComposed();
+  @JsProperty(
+      name = "composed"
+  )
+  boolean composed();
 
   @JsProperty
   void setComposed(boolean composed);
 
   @JsOverlay
   @Nonnull
-  default EventInit composed(boolean composed) {
+  default EventInit composed(final boolean composed) {
     setComposed( composed );
     return this;
   }

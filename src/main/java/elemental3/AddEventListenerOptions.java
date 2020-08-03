@@ -22,28 +22,32 @@ public interface AddEventListenerOptions extends EventListenerOptions {
     return Js.uncheckedCast( JsPropertyMap.of() );
   }
 
-  @JsProperty
-  boolean isOnce();
+  @JsProperty(
+      name = "once"
+  )
+  boolean once();
 
   @JsProperty
   void setOnce(boolean once);
 
   @JsOverlay
   @Nonnull
-  default AddEventListenerOptions once(boolean once) {
+  default AddEventListenerOptions once(final boolean once) {
     setOnce( once );
     return this;
   }
 
-  @JsProperty
-  boolean isPassive();
+  @JsProperty(
+      name = "passive"
+  )
+  boolean passive();
 
   @JsProperty
   void setPassive(boolean passive);
 
   @JsOverlay
   @Nonnull
-  default AddEventListenerOptions passive(boolean passive) {
+  default AddEventListenerOptions passive(final boolean passive) {
     setPassive( passive );
     return this;
   }
@@ -51,7 +55,7 @@ public interface AddEventListenerOptions extends EventListenerOptions {
   @JsOverlay
   @Nonnull
   @Override
-  default AddEventListenerOptions capture(boolean capture) {
+  default AddEventListenerOptions capture(final boolean capture) {
     setCapture( capture );
     return this;
   }

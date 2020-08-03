@@ -22,68 +22,78 @@ public interface SpeechSynthesisEventInit extends EventInit {
     return Js.<SpeechSynthesisEventInit>uncheckedCast( JsPropertyMap.of() ).utterance( utterance );
   }
 
-  @JsProperty
-  int getCharIndex();
+  @JsProperty(
+      name = "charIndex"
+  )
+  int charIndex();
 
   @JsProperty
   void setCharIndex(int charIndex);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisEventInit charIndex(int charIndex) {
+  default SpeechSynthesisEventInit charIndex(final int charIndex) {
     setCharIndex( charIndex );
     return this;
   }
 
-  @JsProperty
-  int getCharLength();
+  @JsProperty(
+      name = "charLength"
+  )
+  int charLength();
 
   @JsProperty
   void setCharLength(int charLength);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisEventInit charLength(int charLength) {
+  default SpeechSynthesisEventInit charLength(final int charLength) {
     setCharLength( charLength );
     return this;
   }
 
-  @JsProperty
-  float getElapsedTime();
+  @JsProperty(
+      name = "elapsedTime"
+  )
+  float elapsedTime();
 
   @JsProperty
   void setElapsedTime(float elapsedTime);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisEventInit elapsedTime(float elapsedTime) {
+  default SpeechSynthesisEventInit elapsedTime(final float elapsedTime) {
     setElapsedTime( elapsedTime );
     return this;
   }
 
-  @JsProperty
-  String getName();
+  @JsProperty(
+      name = "name"
+  )
+  String name();
 
   @JsProperty
   void setName(@Nonnull String name);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisEventInit name(@Nonnull String name) {
+  default SpeechSynthesisEventInit name(@Nonnull final String name) {
     setName( name );
     return this;
   }
 
-  @JsProperty
+  @JsProperty(
+      name = "utterance"
+  )
   @Nonnull
-  SpeechSynthesisUtterance getUtterance();
+  SpeechSynthesisUtterance utterance();
 
   @JsProperty
   void setUtterance(@Nonnull SpeechSynthesisUtterance utterance);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisEventInit utterance(@Nonnull SpeechSynthesisUtterance utterance) {
+  default SpeechSynthesisEventInit utterance(@Nonnull final SpeechSynthesisUtterance utterance) {
     setUtterance( utterance );
     return this;
   }
@@ -91,7 +101,7 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisEventInit bubbles(boolean bubbles) {
+  default SpeechSynthesisEventInit bubbles(final boolean bubbles) {
     setBubbles( bubbles );
     return this;
   }
@@ -99,7 +109,7 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisEventInit cancelable(boolean cancelable) {
+  default SpeechSynthesisEventInit cancelable(final boolean cancelable) {
     setCancelable( cancelable );
     return this;
   }
@@ -107,7 +117,7 @@ public interface SpeechSynthesisEventInit extends EventInit {
   @JsOverlay
   @Nonnull
   @Override
-  default SpeechSynthesisEventInit composed(boolean composed) {
+  default SpeechSynthesisEventInit composed(final boolean composed) {
     setComposed( composed );
     return this;
   }

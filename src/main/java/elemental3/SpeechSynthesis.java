@@ -18,10 +18,6 @@ public class SpeechSynthesis extends EventTarget {
   @Nullable
   public EventHandler onvoiceschanged;
 
-  /**
-   * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
-   */
-  @Deprecated
   SpeechSynthesis() {
   }
 

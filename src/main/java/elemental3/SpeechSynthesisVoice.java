@@ -13,17 +13,13 @@ import jsinterop.annotations.JsType;
     name = "Object"
 )
 public class SpeechSynthesisVoice {
-  /**
-   * Type is instantiated by the runtime no attempt should be made to instantiate type by application code.
-   */
-  @Deprecated
   SpeechSynthesisVoice() {
   }
 
   @JsProperty(
       name = "default"
   )
-  public native boolean _default();
+  public native boolean default_();
 
   @JsProperty(
       name = "lang"
