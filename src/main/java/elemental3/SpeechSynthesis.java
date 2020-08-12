@@ -4,9 +4,11 @@ import elemental2.core.JsArray;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 /**
  * The SpeechSynthesis interface of the Web Speech API is the controller interface for the speech service; this can be used to retrieve information about the synthesis voices available on the device, start and pause speech, and other commands besides.
@@ -20,6 +22,11 @@ import jsinterop.annotations.JsType;
     name = "Object"
 )
 public class SpeechSynthesis extends EventTarget {
+  /**
+   * The onvoiceschanged property of the SpeechSynthesis interface represents an event handler that will run when the list of SpeechSynthesisVoice objects that would be returned by the SpeechSynthesis.getVoices() method has changed (when the voiceschanged event fires.)
+   *
+   * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis/onvoiceschanged">SpeechSynthesis.onvoiceschanged - MDN</a>
+   */
   @Nullable
   public EventHandler onvoiceschanged;
 
@@ -91,4 +98,38 @@ public class SpeechSynthesis extends EventTarget {
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis/speak">SpeechSynthesis.speak - MDN</a>
    */
   public native void speak(@Nonnull SpeechSynthesisUtterance utterance);
+
+  @JsOverlay
+  public final void addVoiceschangedListener(@Nonnull final EventListener callback,
+      @Nonnull final AddEventListenerOptions options) {
+    addEventListener( "voiceschanged", Js.cast( callback ), options );
+  }
+
+  @JsOverlay
+  public final void addVoiceschangedListener(@Nonnull final EventListener callback,
+      final boolean options) {
+    addEventListener( "voiceschanged", Js.cast( callback ), options );
+  }
+
+  @JsOverlay
+  public final void addVoiceschangedListener(@Nonnull final EventListener callback) {
+    addEventListener( "voiceschanged", Js.cast( callback ) );
+  }
+
+  @JsOverlay
+  public final void removeVoiceschangedListener(@Nonnull final EventListener callback,
+      @Nonnull final EventListenerOptions options) {
+    removeEventListener( "voiceschanged", Js.cast( callback ), options );
+  }
+
+  @JsOverlay
+  public final void removeVoiceschangedListener(@Nonnull final EventListener callback,
+      final boolean options) {
+    removeEventListener( "voiceschanged", Js.cast( callback ), options );
+  }
+
+  @JsOverlay
+  public final void removeVoiceschangedListener(@Nonnull final EventListener callback) {
+    removeEventListener( "voiceschanged", Js.cast( callback ) );
+  }
 }
