@@ -164,7 +164,6 @@ abstract class SpeechData
   @Action( verifyRequired = false )
   void onSpeechEvent( @Nonnull final SpeechSynthesisEvent event )
   {
-    //DomGlobal.console.log( "Event " + event.type(), event );
     final String type = event.type();
     if ( !"boundary".equals( type ) )
     {
@@ -186,7 +185,6 @@ abstract class SpeechData
     {
       setUtteredWordOffset( event.charIndex() );
       setUtteredWordLength( event.charLength() );
-      // DomGlobal.console.log( "Word uttered: " + getText().substring( event.charIndex(), event.charIndex() + event.charLength() ) );
     }
   }
 
