@@ -152,12 +152,12 @@ abstract class SpeechData
     utterance.pitch = getPitch();
     final float rate = getRate();
     utterance.rate = (float) Math.pow( Math.abs( rate ) + 1, rate < 0 ? -1 : 1 );
-    utterance.addEventListener( "start", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    utterance.addEventListener( "end", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    utterance.addEventListener( "error", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    utterance.addEventListener( "boundary", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    utterance.addEventListener( "pause", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
-    utterance.addEventListener( "resume", e -> onSpeechEvent( (SpeechSynthesisEvent) e ) );
+    utterance.onstart = this::onSpeechEvent;
+    utterance.onend = this::onSpeechEvent;
+    utterance.onerror = this::onSpeechEvent;
+    utterance.onboundary = this::onSpeechEvent;
+    utterance.onpause = this::onSpeechEvent;
+    utterance.onresume = this::onSpeechEvent;
     speechSynthesis().speak( utterance );
   }
 
