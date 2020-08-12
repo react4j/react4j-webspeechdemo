@@ -105,13 +105,13 @@ abstract class SpeechData
   @OnActivate
   void onVoicesActivate()
   {
-    speechSynthesis().addEventListener( "voiceschanged", _eventListener );
+    speechSynthesis().addVoiceschangedListener( _eventListener );
   }
 
   @OnDeactivate
   void onVoicesDeactivate()
   {
-    speechSynthesis().removeEventListener( "voiceschanged", _eventListener );
+    speechSynthesis().removeVoiceschangedListener( _eventListener );
   }
 
   @Action
