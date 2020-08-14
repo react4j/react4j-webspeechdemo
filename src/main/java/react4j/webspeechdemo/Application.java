@@ -19,7 +19,6 @@ import react4j.annotations.PostMount;
 import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
-import react4j.dom.proptypes.cssPropertyTypes.Visibility;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
