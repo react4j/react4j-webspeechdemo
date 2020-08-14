@@ -78,7 +78,8 @@ abstract class Application
              ),
              div( new HtmlProps().className( "speecharg" ),
                   label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
-                  input( new InputProps().id( "pitch" )
+                  input( new InputProps()
+                           .id( "pitch" )
                            .type( InputType.range )
                            .value( String.valueOf( _speechData.getPitch() ) )
                            .min( "0" )
@@ -96,7 +97,8 @@ abstract class Application
              ),
              div( new HtmlProps().className( "speecharg" ),
                   label( new LabelProps().htmlFor( "rate" ), "Rate" ),
-                  input( new InputProps().id( "rate" )
+                  input( new InputProps()
+                           .id( "rate" )
                            .type( InputType.range )
                            .value( String.valueOf( _speechData.getRate() ) )
                            .min( "-3" )
@@ -114,7 +116,8 @@ abstract class Application
              ),
              div( new HtmlProps().className( "speecharg" ),
                   label( new LabelProps().htmlFor( "volume" ), "Volume" ),
-                  input( new InputProps().id( "volume" )
+                  input( new InputProps()
+                           .id( "volume" )
                            .type( InputType.range )
                            .value( String.valueOf( _speechData.getVolume() ) )
                            .min( "0" )
