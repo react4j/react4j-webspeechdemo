@@ -47,9 +47,19 @@ public class Event {
    */
   public boolean returnValue;
 
+  /**
+   * The Event() constructor creates a new Event.
+   *
+   * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event.Event - MDN</a>
+   */
   public Event(@Nonnull final String type, @Nonnull final EventInit eventInitDict) {
   }
 
+  /**
+   * The Event() constructor creates a new Event.
+   *
+   * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/Event">Event.Event - MDN</a>
+   */
   public Event(@Nonnull final String type) {
   }
 

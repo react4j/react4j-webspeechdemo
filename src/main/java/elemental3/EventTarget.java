@@ -18,6 +18,11 @@ import jsinterop.annotations.JsType;
     name = "EventTarget"
 )
 public class EventTarget {
+  /**
+   * The EventTarget() constructor creates a new EventTarget object instance.
+   *
+   * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget">EventTarget.EventTarget - MDN</a>
+   */
   public EventTarget() {
   }
 
