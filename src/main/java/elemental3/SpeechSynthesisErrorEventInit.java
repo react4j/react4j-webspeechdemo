@@ -8,6 +8,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 import jsinterop.base.Js;
 import jsinterop.base.JsPropertyMap;
+import org.intellij.lang.annotations.MagicConstant;
 
 @Generated("org.realityforge.webtack")
 @JsType(
@@ -19,22 +20,27 @@ public interface SpeechSynthesisErrorEventInit extends SpeechSynthesisEventInit 
   @JsOverlay
   @Nonnull
   static SpeechSynthesisErrorEventInit create(@Nonnull final SpeechSynthesisUtterance utterance,
-      @Nonnull final String error) {
+      @MagicConstant(valuesFromClass = SpeechSynthesisErrorCode.class) @Nonnull final String error) {
     return Js.<SpeechSynthesisErrorEventInit>uncheckedCast( JsPropertyMap.of() ).utterance( utterance ).error( error );
   }
 
   @JsProperty(
       name = "error"
   )
+  @MagicConstant(
+      valuesFromClass = SpeechSynthesisErrorCode.class
+  )
   @Nonnull
   String error();
 
   @JsProperty
-  void setError(@Nonnull String error);
+  void setError(
+      @MagicConstant(valuesFromClass = SpeechSynthesisErrorCode.class) @Nonnull String error);
 
   @JsOverlay
   @Nonnull
-  default SpeechSynthesisErrorEventInit error(@Nonnull final String error) {
+  default SpeechSynthesisErrorEventInit error(
+      @MagicConstant(valuesFromClass = SpeechSynthesisErrorCode.class) @Nonnull final String error) {
     setError( error );
     return this;
   }
