@@ -84,7 +84,7 @@ public class Event {
   public native boolean cancelable();
 
   /**
-   * The read-only composed property of the Event interface returns a Boolean which indicates whether or not the event will propagate across the shadow DOM boundary into the standard DOM.
+   * The read-only composed property of the Event interface returns a Boolean which indicates whether or not the event will propagate across the shadow DOM boundary into the standard DOM.
    *
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composed">Event.composed - MDN</a>
    */
@@ -135,7 +135,7 @@ public class Event {
   public native boolean isTrusted();
 
   /**
-   * Initially implemented in Internet Explorer, Event.srcElement is a now-standard alias (defined in the DOM Standard but flagged as "historical") for the Event.target property. It's supported in all major browser engines, but only for compatibility reasons. Use Event.target instead.
+   * Initially implemented in Internet Explorer, Event.srcElement is a now-standard alias (defined in the DOM Standard but flagged as &quot;historical&quot;) for the Event.target property. It's supported in all major browser engines, but only for compatibility reasons. Use Event.target instead.
    *
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/srcElement">Event.srcElement - MDN</a>
    */
@@ -178,7 +178,7 @@ public class Event {
   public native String type();
 
   /**
-   * The composedPath() method of the Event interface returns the event’s path which is an array of the objects on which listeners will be invoked. This does not include nodes in shadow trees if the shadow root was created with its ShadowRoot.mode closed.
+   * The composedPath() method of the Event interface returns the event&rsquo;s path which is an array of the objects on which listeners will be invoked. This does not include nodes in shadow trees if the shadow root was created with its ShadowRoot.mode closed.
    *
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath">Event.composedPath - MDN</a>
    */

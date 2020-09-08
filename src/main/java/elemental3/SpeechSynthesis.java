@@ -54,7 +54,7 @@ public class SpeechSynthesis extends EventTarget {
   public native boolean pending();
 
   /**
-   * The speaking read-only property of the SpeechSynthesis interface is a Boolean that returns true if an utterance is currently in the process of being spoken — even if SpeechSynthesis is in a paused state.
+   * The speaking read-only property of the SpeechSynthesis interface is a Boolean that returns true if an utterance is currently in the process of being spoken &mdash; even if SpeechSynthesis is in a paused state.
    *
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis/speaking">SpeechSynthesis.speaking - MDN</a>
    */

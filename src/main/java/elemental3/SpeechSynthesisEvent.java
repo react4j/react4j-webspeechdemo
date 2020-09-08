@@ -39,7 +39,7 @@ public class SpeechSynthesisEvent extends Event {
   public native int charLength();
 
   /**
-   * The elapsedTime read-only property of the SpeechSynthesisUtterance interface returns the elapsed time in seconds after the SpeechSynthesisUtterance.text started being spoken that the event was triggered at.
+   * The elapsedTime read-only property of the SpeechSynthesisUtterance interface returns the elapsed time in seconds after the SpeechSynthesisUtterance.text started being spoken that the event was triggered at.
    *
    * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisEvent/elapsedTime">SpeechSynthesisEvent.elapsedTime - MDN</a>
    */
