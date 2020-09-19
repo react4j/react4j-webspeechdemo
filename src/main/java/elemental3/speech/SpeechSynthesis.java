@@ -35,7 +35,7 @@ public class SpeechSynthesis extends EventTarget {
   @Nullable
   public EventHandler onvoiceschanged;
 
-  SpeechSynthesis() {
+  protected SpeechSynthesis() {
   }
 
   /**
