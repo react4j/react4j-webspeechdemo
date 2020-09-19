@@ -2,45 +2,46 @@ package elemental3;
 
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
+import org.intellij.lang.annotations.MagicConstant;
 
 @Generated("org.realityforge.webtack")
-public final class SpeechSynthesisErrorCode {
+@MagicConstant(
+    valuesFromClass = SpeechSynthesisErrorCode.class
+)
+public @interface SpeechSynthesisErrorCode {
   @Nonnull
-  public static final String canceled = "canceled";
+  String audio_busy = "audio-busy";
 
   @Nonnull
-  public static final String interrupted = "interrupted";
+  String audio_hardware = "audio-hardware";
 
   @Nonnull
-  public static final String audio_busy = "audio-busy";
+  String canceled = "canceled";
 
   @Nonnull
-  public static final String audio_hardware = "audio-hardware";
+  String interrupted = "interrupted";
 
   @Nonnull
-  public static final String network = "network";
+  String invalid_argument = "invalid-argument";
 
   @Nonnull
-  public static final String synthesis_unavailable = "synthesis-unavailable";
+  String language_unavailable = "language-unavailable";
 
   @Nonnull
-  public static final String synthesis_failed = "synthesis-failed";
+  String network = "network";
 
   @Nonnull
-  public static final String language_unavailable = "language-unavailable";
+  String not_allowed = "not-allowed";
 
   @Nonnull
-  public static final String voice_unavailable = "voice-unavailable";
+  String synthesis_failed = "synthesis-failed";
 
   @Nonnull
-  public static final String text_too_long = "text-too-long";
+  String synthesis_unavailable = "synthesis-unavailable";
 
   @Nonnull
-  public static final String invalid_argument = "invalid-argument";
+  String text_too_long = "text-too-long";
 
   @Nonnull
-  public static final String not_allowed = "not-allowed";
-
-  private SpeechSynthesisErrorCode() {
-  }
+  String voice_unavailable = "voice-unavailable";
 }
