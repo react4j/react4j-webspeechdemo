@@ -1,15 +1,15 @@
-package elemental3;
+package elemental3.speech;
 
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Handle events of type SpeechSynthesisEvent
+ * Handle events of type SpeechSynthesisErrorEvent
  */
 @Generated("org.realityforge.webtack")
 @JsFunction
 @FunctionalInterface
-public interface SpeechSynthesisEventHandler {
-  void onInvoke(@Nonnull SpeechSynthesisEvent event);
+public interface SpeechSynthesisErrorEventHandler {
+  void onInvoke(@Nonnull SpeechSynthesisErrorEvent event);
 }

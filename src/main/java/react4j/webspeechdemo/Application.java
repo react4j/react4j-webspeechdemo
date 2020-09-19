@@ -10,7 +10,7 @@ import elemental2.dom.HTMLInputElement;
 import elemental2.dom.HTMLSelectElement;
 import elemental2.dom.HTMLTextAreaElement;
 import elemental2.dom.Range;
-import elemental3.SpeechSynthesisVoice;
+import elemental3.speech.SpeechSynthesisVoice;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.base.Js;

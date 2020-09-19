@@ -1,5 +1,6 @@
-package elemental3;
+package elemental3.speech;
 
+import elemental3.Event;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsPackage;

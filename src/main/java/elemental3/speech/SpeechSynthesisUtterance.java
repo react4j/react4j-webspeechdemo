@@ -1,5 +1,8 @@
-package elemental3;
+package elemental3.speech;
 
+import elemental3.AddEventListenerOptions;
+import elemental3.EventListenerOptions;
+import elemental3.EventTarget;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
