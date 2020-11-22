@@ -237,7 +237,7 @@ abstract class Application
       .transition( 0 == length ? "all 0s ease 0s" : "all 50ms ease" )
       .top( null == markerRect ?
             "0" :
-            ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight + marginInPixels ) + "px" ) )
+            ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight - marginInPixels ) + "px" ) )
       .left( null == markerRect ?
              "0" :
              ( ( markerRect.left - 1 + body.clientWidth - body.scrollWidth - marginInPixels ) + "px" ) )
