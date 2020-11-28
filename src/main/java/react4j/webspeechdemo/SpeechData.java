@@ -11,7 +11,6 @@ import arez.annotations.Observable;
 import arez.annotations.Observe;
 import arez.annotations.OnActivate;
 import arez.annotations.OnDeactivate;
-import elemental2.dom.DomGlobal;
 import elemental3.EventListener;
 import elemental3.Window;
 import elemental3.core.JsArray;
@@ -23,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.base.Js;
 
 @ArezComponent
 abstract class SpeechData
@@ -134,7 +134,7 @@ abstract class SpeechData
   @Nonnull
   private SpeechSynthesis speechSynthesis()
   {
-    return Window.of( DomGlobal.window ).speechSynthesis();
+    return Window.of( Js.global().get( "window" ) ).speechSynthesis();
   }
 
   void stopSpeaking()
