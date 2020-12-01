@@ -13,12 +13,10 @@ import arez.annotations.OnActivate;
 import arez.annotations.OnDeactivate;
 import elemental3.EventListener;
 import elemental3.Window;
-import elemental3.core.JsArray;
 import elemental3.speech.SpeechSynthesis;
 import elemental3.speech.SpeechSynthesisEvent;
 import elemental3.speech.SpeechSynthesisUtterance;
 import elemental3.speech.SpeechSynthesisVoice;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -95,8 +93,7 @@ abstract class SpeechData
   @Memoize( depType = DepType.AREZ_OR_EXTERNAL )
   List<SpeechSynthesisVoice> getVoices()
   {
-    final JsArray<SpeechSynthesisVoice> voices = speechSynthesis().getVoices();
-    return Arrays.asList( voices.asArray( new SpeechSynthesisVoice[ voices.length ] ) );
+    return speechSynthesis().getVoices().asList();
   }
 
   @ComputableValueRef
