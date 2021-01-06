@@ -8,7 +8,7 @@ artifacts:
   idea_codestyle: au.com.stocksoftware.idea.codestyle:idea-codestyle:xml:1.14
 
   javax_annotation: org.realityforge.javax.annotation:javax.annotation:jar:1.0.1
-  jetbrains_annotations: org.realityforge.org.jetbrains.annotations:org.jetbrains.annotations:jar:1.6.0
+  jetbrains_annotations: org.realityforge.org.jetbrains.annotations:org.jetbrains.annotations:jar:1.7.0
 
   # GWT deps
   gwt_user: com.google.gwt:gwt-user:jar:2.9.0
@@ -26,8 +26,8 @@ artifacts:
 
   braincheck: org.realityforge.braincheck:braincheck:jar:1.29.0
 
-  arez_core: org.realityforge.arez:arez-core:jar:0.191
-  arez_processor: org.realityforge.arez:arez-processor:jar:0.191
+  arez_core: org.realityforge.arez:arez-core:jar:0.192
+  arez_processor: org.realityforge.arez:arez-processor:jar:0.192
   arez_spytools: org.realityforge.arez.spytools:arez-spytools:jar:0.110
 
   react4j_core: org.realityforge.react4j:react4j-core:jar:0.178
