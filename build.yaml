@@ -26,12 +26,12 @@ artifacts:
 
   braincheck: org.realityforge.braincheck:braincheck:jar:1.29.0
 
-  zemeckis: org.realityforge.zemeckis:zemeckis-core:jar:0.04
+  zemeckis: org.realityforge.zemeckis:zemeckis-core:jar:0.08
 
   arez_core: org.realityforge.arez:arez-core:jar:0.192
   arez_processor: org.realityforge.arez:arez-processor:jar:0.192
   arez_spytools: org.realityforge.arez.spytools:arez-spytools:jar:0.110
 
-  react4j_core: org.realityforge.react4j:react4j-core:jar:0.178
-  react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.178
-  react4j_processor: org.realityforge.react4j:react4j-processor:jar:0.178
+  react4j_core: org.realityforge.react4j:react4j-core:jar:0.179
+  react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.179
+  react4j_processor: org.realityforge.react4j:react4j-processor:jar:0.179
