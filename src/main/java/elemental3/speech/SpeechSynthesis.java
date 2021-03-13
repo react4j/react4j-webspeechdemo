@@ -5,7 +5,7 @@ import elemental3.EventHandler;
 import elemental3.EventListener;
 import elemental3.EventListenerOptions;
 import elemental3.EventTarget;
-import elemental3.core.JsArray;
+import elemental3.lang.JsArray;
 import javax.annotation.Generated;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
