@@ -1,5 +1,11 @@
 package react4j.webspeechdemo;
 
+import akasha.EventListener;
+import akasha.Window;
+import akasha.speech.SpeechSynthesis;
+import akasha.speech.SpeechSynthesisEvent;
+import akasha.speech.SpeechSynthesisUtterance;
+import akasha.speech.SpeechSynthesisVoice;
 import arez.ComputableValue;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
@@ -11,12 +17,6 @@ import arez.annotations.Observable;
 import arez.annotations.Observe;
 import arez.annotations.OnActivate;
 import arez.annotations.OnDeactivate;
-import elemental3.EventListener;
-import elemental3.Window;
-import elemental3.speech.SpeechSynthesis;
-import elemental3.speech.SpeechSynthesisEvent;
-import elemental3.speech.SpeechSynthesisUtterance;
-import elemental3.speech.SpeechSynthesisVoice;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
