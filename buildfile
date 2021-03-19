@@ -1,4 +1,6 @@
 require 'buildr/git_auto_version'
+require 'buildr/single_intermediate_layout'
+require 'buildr/top_level_generate_dir'
 require 'buildr/gwt'
 
 desc 'React4j WebSpeech Demo'
@@ -11,9 +13,6 @@ define 'react4j-webspeechdemo' do
   project.compile.options.other = %w(-Werror -Xmaxerrs 10000 -Xmaxwarns 10000)
 
   project.version = ENV['PRODUCT_VERSION'] if ENV['PRODUCT_VERSION']
-
-  project.processorpath << :react4j_processor
-  project.processorpath << :arez_processor
 
   compile.with :javax_annotation,
                :jetbrains_annotations,
@@ -31,6 +30,8 @@ define 'react4j-webspeechdemo' do
                :arez_spytools,
                :gwt_user
 
+  compile.options[:processor_path] << [:react4j_processor, :arez_processor]
+
   # Exclude the Dev module if EXCLUDE_GWT_DEV_MODULE is true
   GWT_MODULES = %w(react4j.webspeechdemo.WebSpeechDemoProd) + (ENV['EXCLUDE_GWT_DEV_MODULE'] == 'true' ? [] : %w(react4j.webspeechdemo.WebSpeechDemoDev))
   gwt_enhance(project,
@@ -44,8 +45,6 @@ define 'react4j-webspeechdemo' do
 
   iml.excluded_directories << project._('tmp')
 
-  ipr.add_component_from_artifact(:idea_codestyle)
-
   ipr.add_gwt_configuration(project,
                             :gwt_module => 'react4j.webspeechdemo.WebSpeechDemoDev',
                             :start_javascript_debugger => false,
@@ -53,4 +52,9 @@ define 'react4j-webspeechdemo' do
                             :vm_parameters => '-Xmx2G',
                             :shell_parameters => "-strict -style PRETTY -XmethodNameDisplayMode FULL -nostartServer -incremental -codeServerPort 8889 -bindAddress 0.0.0.0 -deploy #{_(:generated, :gwt, 'deploy')} -extra #{_(:generated, :gwt, 'extra')} -war #{_(:generated, :gwt, 'war')}",
                             :launch_page => 'http://127.0.0.1:8889/webspeechdemo_dev/index.html')
+
+  ipr.add_component_from_artifact(:idea_codestyle)
+  ipr.add_code_insight_settings
+  ipr.add_nullable_manager
+  ipr.add_javac_settings('-Xlint:all,-processing,-serial -Werror -Xmaxerrs 10000 -Xmaxwarns 10000')
 end
