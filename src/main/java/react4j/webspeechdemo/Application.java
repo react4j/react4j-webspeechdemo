@@ -1,16 +1,17 @@
 package react4j.webspeechdemo;
 
-import arez.annotations.CascadeDispose;
-import elemental2.dom.DOMRect;
-import elemental2.dom.DocumentRange;
-import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLBodyElement;
-import elemental2.dom.HTMLDivElement;
-import elemental2.dom.HTMLInputElement;
-import elemental2.dom.HTMLSelectElement;
-import elemental2.dom.HTMLTextAreaElement;
-import elemental2.dom.Range;
+import akasha.DOMRect;
+import akasha.Document;
+import akasha.Global;
+import akasha.HTMLBodyElement;
+import akasha.HTMLDivElement;
+import akasha.HTMLInputElement;
+import akasha.HTMLSelectElement;
+import akasha.HTMLTextAreaElement;
+import akasha.Node;
+import akasha.Range;
 import akasha.speech.SpeechSynthesisVoice;
+import arez.annotations.CascadeDispose;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.base.Js;
@@ -206,13 +207,15 @@ abstract class Application
     final int length = _speechData.utteredWordLength();
     if ( 0 != length && null != _textContent )
     {
-      final DocumentRange documentRange = Js.uncheckedCast( DomGlobal.document );
+      final Document documentRange = Global.document();
       //noinspection ConstantConditions
       assert null != documentRange;
       final Range range = documentRange.createRange();
       final int offset = _speechData.utteredWordOffset();
-      range.setStart( _textContent.firstChild, offset );
-      range.setEnd( _textContent.firstChild, offset + length );
+      final Node node = _textContent.firstChild();
+      assert null != node;
+      range.setStart( node, offset );
+      range.setEnd( node, offset + length );
       return range.getBoundingClientRect();
     }
     else
@@ -225,7 +228,8 @@ abstract class Application
   private CssProps markerCssProps()
   {
     final DOMRect markerRect = deriveUtteranceBounds();
-    final HTMLBodyElement body = DomGlobal.document.body;
+    final HTMLBodyElement body = (HTMLBodyElement) Global.document().body;
+    assert null != body;
     final int length = _speechData.utteredWordLength();
 
     //This margin comes from "margin: .5rem;" in "#textarea > *" css rule
@@ -237,10 +241,10 @@ abstract class Application
       .transition( 0 == length ? "all 0s ease 0s" : "all 50ms ease" )
       .top( null == markerRect ?
             "0" :
-            ( ( markerRect.top - 1 + body.clientHeight - body.scrollHeight - marginInPixels ) + "px" ) )
+            ( ( markerRect.top() - 1 + body.clientHeight() - body.scrollHeight() - marginInPixels ) + "px" ) )
       .left( null == markerRect ?
              "0" :
-             ( ( markerRect.left - 1 + body.clientWidth - body.scrollWidth - marginInPixels ) + "px" ) )
+             ( ( markerRect.left() - 1 + body.clientWidth() - body.scrollWidth() - marginInPixels ) + "px" ) )
       .width( null == markerRect ? "0" : ( markerRect.width + "px" ) )
       .height( null == markerRect ? "0" : ( markerRect.height + "px" ) );
   }

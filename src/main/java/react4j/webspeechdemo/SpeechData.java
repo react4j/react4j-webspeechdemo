@@ -1,7 +1,7 @@
 package react4j.webspeechdemo;
 
 import akasha.EventListener;
-import akasha.Window;
+import akasha.Global;
 import akasha.speech.SpeechSynthesis;
 import akasha.speech.SpeechSynthesisEvent;
 import akasha.speech.SpeechSynthesisUtterance;
@@ -20,7 +20,6 @@ import arez.annotations.OnDeactivate;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.base.Js;
 
 @ArezComponent
 abstract class SpeechData
@@ -131,7 +130,7 @@ abstract class SpeechData
   @Nonnull
   private SpeechSynthesis speechSynthesis()
   {
-    return Window.of( Js.global().get( "window" ) ).speechSynthesis();
+    return Global.speechSynthesis();
   }
 
   void stopSpeaking()

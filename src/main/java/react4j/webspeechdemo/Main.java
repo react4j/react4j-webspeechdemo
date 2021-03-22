@@ -1,7 +1,8 @@
 package react4j.webspeechdemo;
 
+import akasha.Element;
+import akasha.Global;
 import com.google.gwt.core.client.EntryPoint;
-import elemental2.dom.DomGlobal;
 import react4j.dom.ReactDOM;
 
 public final class Main
@@ -10,6 +11,8 @@ public final class Main
   @Override
   public void onModuleLoad()
   {
-    ReactDOM.render( ApplicationBuilder.build(), DomGlobal.document.getElementById( "app" ) );
+    final Element element = Global.document().getElementById( "app" );
+    assert null != element;
+    ReactDOM.render( ApplicationBuilder.build(), element );
   }
 }
