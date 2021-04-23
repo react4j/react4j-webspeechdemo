@@ -2,7 +2,6 @@ package react4j.webspeechdemo;
 
 import akasha.DOMRect;
 import akasha.Document;
-import akasha.Global;
 import akasha.HTMLBodyElement;
 import akasha.HTMLDivElement;
 import akasha.HTMLInputElement;
@@ -10,6 +9,7 @@ import akasha.HTMLSelectElement;
 import akasha.HTMLTextAreaElement;
 import akasha.Node;
 import akasha.Range;
+import akasha.WindowGlobal;
 import akasha.speech.SpeechSynthesisVoice;
 import arez.annotations.CascadeDispose;
 import javax.annotation.Nonnull;
@@ -207,7 +207,7 @@ abstract class Application
     final int length = _speechData.utteredWordLength();
     if ( 0 != length && null != _textContent )
     {
-      final Document documentRange = Global.document();
+      final Document documentRange = WindowGlobal.document();
       //noinspection ConstantConditions
       assert null != documentRange;
       final Range range = documentRange.createRange();
@@ -228,7 +228,7 @@ abstract class Application
   private CssProps markerCssProps()
   {
     final DOMRect markerRect = deriveUtteranceBounds();
-    final HTMLBodyElement body = (HTMLBodyElement) Global.document().body;
+    final HTMLBodyElement body = (HTMLBodyElement) WindowGlobal.document().body;
     assert null != body;
     final int length = _speechData.utteredWordLength();
 

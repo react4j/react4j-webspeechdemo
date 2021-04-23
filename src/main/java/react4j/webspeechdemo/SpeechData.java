@@ -1,7 +1,7 @@
 package react4j.webspeechdemo;
 
 import akasha.EventListener;
-import akasha.Global;
+import akasha.WindowGlobal;
 import akasha.speech.SpeechSynthesis;
 import akasha.speech.SpeechSynthesisEvent;
 import akasha.speech.SpeechSynthesisUtterance;
@@ -130,7 +130,7 @@ abstract class SpeechData
   @Nonnull
   private SpeechSynthesis speechSynthesis()
   {
-    return Global.speechSynthesis();
+    return WindowGlobal.speechSynthesis();
   }
 
   void stopSpeaking()
