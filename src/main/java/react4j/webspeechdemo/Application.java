@@ -207,10 +207,10 @@ abstract class Application
     final int length = _speechData.utteredWordLength();
     if ( 0 != length && null != _textContent )
     {
-      final Document documentRange = WindowGlobal.document();
+      final Document document = WindowGlobal.document();
       //noinspection ConstantConditions
-      assert null != documentRange;
-      final Range range = documentRange.createRange();
+      assert null != document;
+      final Range range = document.createRange();
       final int offset = _speechData.utteredWordOffset();
       final Node node = _textContent.firstChild();
       assert null != node;
