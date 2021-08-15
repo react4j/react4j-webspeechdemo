@@ -1,5 +1,6 @@
 package react4j.webspeechdemo;
 
+import akasha.Console;
 import akasha.Element;
 import akasha.WindowGlobal;
 import com.google.gwt.core.client.EntryPoint;
@@ -11,8 +12,15 @@ public final class Main
   @Override
   public void onModuleLoad()
   {
-    final Element element = WindowGlobal.document().getElementById( "app" );
-    assert null != element;
-    ReactDOM.render( ApplicationBuilder.build(), element );
+    if ( WindowGlobal.isSpeechSynthesisSupported() )
+    {
+      final Element element = WindowGlobal.document().getElementById( "app" );
+      assert null != element;
+      ReactDOM.render( ApplicationBuilder.build(), element );
+    }
+    else
+    {
+      Console.log( "Speech API not present" );
+    }
   }
 }

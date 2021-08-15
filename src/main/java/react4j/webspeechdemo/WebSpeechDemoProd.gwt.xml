@@ -8,6 +8,13 @@
   <set-property name='arez.purge_tasks_when_runaway_detected' value='false'/>
   <set-property name='arez.logger' value='none'/>
 
+  <!--
+    Optimize out the check and just assume speechSynthesis is available.
+    Should not do this in a real application but this is acceptable in an example
+    application used to test optimizing of code.
+  -->
+  <set-property name='akasha.is__Window_speechSynthesis__supported' value='detect'/>
+
   <add-linker name='sso'/>
 
   <source path='ignore'/>
