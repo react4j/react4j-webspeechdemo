@@ -13,7 +13,7 @@
     Should not do this in a real application but this is acceptable in an example
     application used to test optimizing of code.
   -->
-  <set-property name='akasha.is__Window_speechSynthesis__supported' value='detect'/>
+  <set-property name='akasha.is__Window_speechSynthesis__supported' value='true'/>
 
   <add-linker name='sso'/>
 
