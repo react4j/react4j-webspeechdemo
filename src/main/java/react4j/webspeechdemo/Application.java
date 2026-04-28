@@ -44,6 +44,7 @@ abstract class Application
     "little or no money in my purse, and nothing particular to interest me on shore, I thought " +
     "I would sail about a little and see the watery part of the world.";
   @CascadeDispose
+  @Nonnull
   final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME, DEFAULT_TEXT );
   @Nullable
   private HTMLDivElement _textContent;
