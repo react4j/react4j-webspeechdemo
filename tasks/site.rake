@@ -34,23 +34,16 @@ desc 'Build the website'
 task 'site:deploy' => ['site:build'] do
   origin_url = 'https://github.com/react4j/react4j.github.io.git'
 
-  travis_build_number = ENV['TRAVIS_BUILD_NUMBER']
-  if travis_build_number
-    origin_url = origin_url.gsub('https://github.com/', 'git@github.com:')
-  end
-
   local_dir = "#{WORKSPACE_DIR}/target/remote_site"
   rm_rf local_dir
 
   sh "git clone -b master --depth 1 #{origin_url} #{local_dir}"
 
   in_dir(local_dir) do
-    message ="Update WebSpeechDemo website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
-
     rm_rf "#{local_dir}/webspeechdemo"
     cp_r Dir["#{SITE_DIR}/webspeechdemo"], local_dir
     sh 'git add . -f'
-    puts `git commit -m "#{message}"`
+    puts `git commit -m "Update WebSpeechDemo website"`
     if 0 == $?.exitstatus
       sh 'git push -f origin master'
     end
@@ -59,12 +52,5 @@ end
 
 desc 'Publish the website if build is on candidate branch'
 task 'site:deploy_if_candidate_branch' do
-  branch = ENV['TRAVIS_BRANCH']
-  if branch.nil? || %w(master).include?(branch)
-    ENV['SITE_BRANCH'] = branch
-    puts "Deploying site for branch '#{branch}'"
-    task('site:deploy').invoke
-  else
-    puts "Site deploy skipped as branch '#{branch}' is not in the candidate set"
-  end
+  task('site:deploy').invoke
 end
