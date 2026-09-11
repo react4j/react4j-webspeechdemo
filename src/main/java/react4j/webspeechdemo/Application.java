@@ -68,14 +68,14 @@ abstract class Application
              div( new HtmlProps().id( "textarea" ),
                   _speechData.isSpeaking() ?
                   fragment(
-                    div( new HtmlProps().ref( e -> _textContent = ( (HTMLDivElement) e ) ).id( "textbeingspoken" ),
+                    div( new HtmlProps().ref( e -> _textContent = Js.uncheckedCast( e ) ).id( "textbeingspoken" ),
                          _speechData.getText() ),
                     div( new HtmlProps().style( markerCssProps() ) )
                   ) :
                   textarea( new TextAreaProps()
                               .value( _speechData.getText() )
                               .disabled( _speechData.isSpeaking() )
-                              .onChange( e -> _speechData.setText( ( (HTMLTextAreaElement) e.getTarget() ).value ) ) )
+                              .onChange( e -> _speechData.setText( Js.<HTMLTextAreaElement>uncheckedCast( e.getTarget() ).value ) ) )
              ),
              div( new HtmlProps().className( "speecharg" ),
                   label( new LabelProps().htmlFor( "pitch" ), "Pitch" ),
@@ -87,7 +87,7 @@ abstract class Application
                            .max( "1" )
                            .step( "0.05" )
                            .disabled( _speechData.isSpeaking() )
-                           .onChange( e -> _speechData.setPitch( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                           .onChange( e -> _speechData.setPitch( Float.parseFloat( Js.<HTMLInputElement>uncheckedCast( e.getTarget() ).value ) ) ) ),
                   button( new BtnProps()
                             .type( ButtonType.button )
                             .prop( "aria-label", Js.asAny( "Reset pitch" ) )
@@ -106,7 +106,7 @@ abstract class Application
                            .max( "3" )
                            .step( "0.25" )
                            .disabled( _speechData.isSpeaking() )
-                           .onChange( e -> _speechData.setRate( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) ) ),
+                           .onChange( e -> _speechData.setRate( Float.parseFloat( Js.<HTMLInputElement>uncheckedCast( e.getTarget() ).value ) ) ) ),
                   button( new BtnProps()
                             .type( ButtonType.button )
                             .prop( "aria-label", Js.asAny( "Reset rate" ) )
@@ -125,7 +125,7 @@ abstract class Application
                            .max( "1" )
                            .step( "0.05" )
                            .disabled( _speechData.isSpeaking() )
-                           .onChange( e -> _speechData.setVolume( Float.parseFloat( ( (HTMLInputElement) e.getTarget() ).value ) ) )
+                           .onChange( e -> _speechData.setVolume( Float.parseFloat( Js.<HTMLInputElement>uncheckedCast( e.getTarget() ).value ) ) )
                   ),
                   button( new BtnProps()
                             .type( ButtonType.button )
@@ -199,7 +199,7 @@ abstract class Application
 
   void onVoiceChange( @Nonnull final FormEvent e )
   {
-    _speechData.setVoiceByVoiceURI( ( (HTMLSelectElement) e.getTarget() ).value );
+    _speechData.setVoiceByVoiceURI( Js.<HTMLSelectElement>uncheckedCast( e.getTarget() ).value );
   }
 
   @Nullable
