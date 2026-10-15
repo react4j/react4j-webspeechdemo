@@ -1,10 +1,10 @@
 package react4j.webspeechdemo;
 
-import akasha.Console;
-import akasha.Element;
-import akasha.WindowGlobal;
 import com.google.gwt.core.client.EntryPoint;
 import react4j.dom.ReactDOM;
+import react4j.webspeechdemo.browser.Console;
+import react4j.webspeechdemo.browser.Element;
+import react4j.webspeechdemo.browser.WindowGlobal;
 
 public final class Main
   implements EntryPoint

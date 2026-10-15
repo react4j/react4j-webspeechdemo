@@ -1,16 +1,5 @@
 package react4j.webspeechdemo;
 
-import akasha.DOMRect;
-import akasha.Document;
-import akasha.HTMLBodyElement;
-import akasha.HTMLDivElement;
-import akasha.HTMLInputElement;
-import akasha.HTMLSelectElement;
-import akasha.HTMLTextAreaElement;
-import akasha.Node;
-import akasha.Range;
-import akasha.WindowGlobal;
-import akasha.speech.SpeechSynthesisVoice;
 import arez.annotations.CascadeDispose;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,6 +19,16 @@ import react4j.dom.proptypes.html.SelectProps;
 import react4j.dom.proptypes.html.TextAreaProps;
 import react4j.dom.proptypes.html.attributeTypes.ButtonType;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
+import react4j.webspeechdemo.browser.DOMRect;
+import react4j.webspeechdemo.browser.Document;
+import react4j.webspeechdemo.browser.Element;
+import react4j.webspeechdemo.browser.HTMLInputElement;
+import react4j.webspeechdemo.browser.HTMLSelectElement;
+import react4j.webspeechdemo.browser.HTMLTextAreaElement;
+import react4j.webspeechdemo.browser.Node;
+import react4j.webspeechdemo.browser.Range;
+import react4j.webspeechdemo.browser.WindowGlobal;
+import react4j.webspeechdemo.browser.speech.SpeechSynthesisVoice;
 import static react4j.dom.DOM.*;
 
 @View( type = View.Type.TRACKING )
@@ -47,7 +46,7 @@ abstract class Application
   @Nonnull
   final SpeechData _speechData = SpeechData.create( DEFAULT_PITCH, DEFAULT_RATE, DEFAULT_VOLUME, DEFAULT_TEXT );
   @Nullable
-  private HTMLDivElement _textContent;
+  private Element _textContent;
 
   @PostMount
   void postMount()
@@ -227,7 +226,7 @@ abstract class Application
   private CssProps markerCssProps()
   {
     final DOMRect markerRect = deriveUtteranceBounds();
-    final HTMLBodyElement body = (HTMLBodyElement) WindowGlobal.document().body;
+    final Element body = WindowGlobal.document().body;
     assert null != body;
     final int length = _speechData.utteredWordLength();
 
