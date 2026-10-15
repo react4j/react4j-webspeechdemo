@@ -16,8 +16,6 @@ artifacts:
 
   jsinterop_base: com.google.jsinterop:base:jar:1.0.0
 
-  akasha: org.realityforge.akasha:akasha-gwt:jar:0.30
-
   grim_annotations: org.realityforge.grim:grim-annotations:jar:0.09
 
   braincheck_core: org.realityforge.braincheck:braincheck-core:jar:1.35.0

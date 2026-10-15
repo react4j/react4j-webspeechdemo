@@ -28,7 +28,6 @@ define 'react4j-webspeechdemo' do
                :jetbrains_annotations,
                :jsinterop_base,
                :jsinterop_annotations,
-               :akasha,
                :braincheck_core,
                :braincheck_jre,
                :grim_annotations,

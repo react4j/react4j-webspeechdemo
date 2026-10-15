@@ -1,11 +1,5 @@
 package react4j.webspeechdemo;
 
-import akasha.EventListener;
-import akasha.WindowGlobal;
-import akasha.speech.SpeechSynthesis;
-import akasha.speech.SpeechSynthesisEvent;
-import akasha.speech.SpeechSynthesisUtterance;
-import akasha.speech.SpeechSynthesisVoice;
 import arez.ComputableValue;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
@@ -20,12 +14,18 @@ import arez.annotations.OnDeactivate;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import react4j.webspeechdemo.browser.EventHandler;
+import react4j.webspeechdemo.browser.WindowGlobal;
+import react4j.webspeechdemo.browser.speech.SpeechSynthesis;
+import react4j.webspeechdemo.browser.speech.SpeechSynthesisEvent;
+import react4j.webspeechdemo.browser.speech.SpeechSynthesisUtterance;
+import react4j.webspeechdemo.browser.speech.SpeechSynthesisVoice;
 
 @ArezComponent
 abstract class SpeechData
 {
   @Nonnull
-  private final EventListener _eventListener = e -> triggerRecalculation( getVoicesComputableValue() );
+  private final EventHandler _eventListener = e -> triggerRecalculation( getVoicesComputableValue() );
 
   @SuppressWarnings( "SameParameterValue" )
   @Nonnull
@@ -101,13 +101,13 @@ abstract class SpeechData
   @OnActivate
   void onVoicesActivate()
   {
-    speechSynthesis().addVoiceschangedListener( _eventListener );
+    speechSynthesis().addEventListener( "voiceschanged", _eventListener );
   }
 
   @OnDeactivate
   void onVoicesDeactivate()
   {
-    speechSynthesis().removeVoiceschangedListener( _eventListener );
+    speechSynthesis().removeEventListener( "voiceschanged", _eventListener );
   }
 
   @Action
